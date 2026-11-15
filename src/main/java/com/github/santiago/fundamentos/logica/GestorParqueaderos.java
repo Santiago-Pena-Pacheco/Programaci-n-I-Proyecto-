@@ -1,4 +1,7 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.logica;
+
+import com.github.santiago.fundamentos.modelo.Parqueadero;
+import com.github.santiago.fundamentos.modelo.Persona;
 
 import java.util.ArrayList;
 

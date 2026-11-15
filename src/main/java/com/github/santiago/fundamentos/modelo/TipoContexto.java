@@ -1,4 +1,4 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.modelo;
 
 /**
  * Define los contextos de uso soportados por el software y, para cada uno,

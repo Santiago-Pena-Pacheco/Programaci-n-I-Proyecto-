@@ -1,4 +1,6 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.modelo;
+
+import com.github.santiago.fundamentos.logica.GestorParqueaderos;
 
 /**
  * Representa a un visitante externo (temporal). Segun el TipoContexto

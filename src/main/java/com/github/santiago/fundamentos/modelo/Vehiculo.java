@@ -1,4 +1,4 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.modelo;
 
 /**
  * Representa un vehiculo, ya sea de un usuario fijo o de un visitante.

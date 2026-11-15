@@ -1,4 +1,13 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.logica;
+
+import com.github.santiago.fundamentos.gui.InterfazPrincipal;
+import com.github.santiago.fundamentos.modelo.Incidente;
+import com.github.santiago.fundamentos.modelo.Parqueadero;
+import com.github.santiago.fundamentos.modelo.TipoContexto;
+import com.github.santiago.fundamentos.modelo.UbicacionDestino;
+import com.github.santiago.fundamentos.modelo.UsuarioFijo;
+import com.github.santiago.fundamentos.modelo.Vehiculo;
+import com.github.santiago.fundamentos.modelo.Visitante;
 
 import java.util.ArrayList;
 

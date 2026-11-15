@@ -1,4 +1,6 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.modelo;
+
+import com.github.santiago.fundamentos.logica.GestorParqueaderos;
 
 /**
  * Representa a una persona con vinculo permanente en la zona controlada.
