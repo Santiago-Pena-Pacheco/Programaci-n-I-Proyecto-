@@ -24,5 +24,16 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.4.0</version>
         </dependency>
+        <!-- Vision artificial: OpenCV empaquetado y OCR Tesseract -->
+        <dependency>
+            <groupId>org.openpnp</groupId>
+            <artifactId>opencv</artifactId>
+            <version>4.9.0-0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.tess4j</groupId>
+            <artifactId>tess4j</artifactId>
+            <version>5.11.0</version>
+        </dependency>
     </dependencies>
 </project>
