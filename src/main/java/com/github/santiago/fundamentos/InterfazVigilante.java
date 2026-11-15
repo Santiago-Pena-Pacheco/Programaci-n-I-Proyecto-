@@ -98,7 +98,7 @@ public class InterfazVigilante {
             Propietario propietario = sistema.registrarPropietario(
                     nombre, cedula, numeroApartamento, numeroTorre, numeroParqueadero, placa);
 
-            propietario.mostrarInformacion();
+            propietario.mostrarInformacion(sistema.getContextoActivo());
 
             JOptionPane.showMessageDialog(null,
                     "Propietario registrado correctamente.\n"
@@ -119,7 +119,7 @@ public class InterfazVigilante {
 
         Visitante visitante = sistema.registrarVisitante(placa, nombre, cedula, apartamentoDestino);
 
-        visitante.mostrarInformacion();
+        visitante.mostrarInformacion(sistema.getContextoActivo());
 
         if (visitante.getParqueaderoAsignado() != null) {
             JOptionPane.showMessageDialog(null,

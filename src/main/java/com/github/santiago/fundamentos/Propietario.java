@@ -18,13 +18,13 @@ public class Propietario extends Persona {
     }
 
     @Override
-    public String getEtiquetaTipo() {
-        return "Propietario";
+    public String getEtiquetaTipo(TipoContexto contexto) {
+        return contexto.getEtiquetaUsuarioFijo();
     }
 
     @Override
-    public void mostrarInformacion() {
-        super.mostrarInformacion();
+    public void mostrarInformacion(TipoContexto contexto) {
+        super.mostrarInformacion(contexto);
         System.out.println("apartamento = " + apartamento.getNumero());
         System.out.println("torre = " + apartamento.getTorre());
         System.out.println("parqueadero = " + apartamento.getParqueadero().getNumero());

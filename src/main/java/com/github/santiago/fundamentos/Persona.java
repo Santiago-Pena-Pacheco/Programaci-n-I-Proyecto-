@@ -37,12 +37,12 @@ public abstract class Persona {
         return vehiculo;
     }
 
-    /** Cada subclase decide como se llama (Propietario, Visitante...). */
-    public abstract String getEtiquetaTipo();
+    /** Cada subclase decide como se llama segun el contexto activo (Propietario, Empleado, Cliente...). */
+    public abstract String getEtiquetaTipo(TipoContexto contexto);
 
-    public void mostrarInformacion() {
+    public void mostrarInformacion(TipoContexto contexto) {
         System.out.println(" ====================== ");
-        System.out.println("tipo = " + getEtiquetaTipo());
+        System.out.println("tipo = " + getEtiquetaTipo(contexto));
         System.out.println("nombre = " + nombre);
         System.out.println("cedula = " + cedula);
         System.out.println("placa vehiculo = " + vehiculo.getPlaca());

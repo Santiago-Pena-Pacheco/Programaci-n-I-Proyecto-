@@ -13,6 +13,7 @@ public class SistemaControlAcceso {
     private ArrayList<Visitante> visitantes;
     private ArrayList<Incidente> incidentes;
     private GestorParqueaderos gestorParqueaderos;
+    private TipoContexto contextoActivo = TipoContexto.RESIDENCIAL;
 
     // Cantidad de parqueaderos de visitantes que se crean al iniciar el sistema
     private static final int CANTIDAD_PARQUEADEROS_VISITANTES = 10;
@@ -76,7 +77,7 @@ public class SistemaControlAcceso {
             return;
         }
         for (Propietario p : this.propietarios) {
-            p.mostrarInformacion();
+            p.mostrarInformacion(contextoActivo);
         }
     }
 
@@ -86,7 +87,7 @@ public class SistemaControlAcceso {
             return;
         }
         for (Visitante v : this.visitantes) {
-            v.mostrarInformacion();
+            v.mostrarInformacion(contextoActivo);
         }
     }
 
@@ -100,4 +101,13 @@ public class SistemaControlAcceso {
         }
     }
 
+
+    public TipoContexto getContextoActivo() {
+        return contextoActivo;
+    }
+
+    /** El administrador puede cambiar el contexto (residencial, centro comercial, oficina o concierto). */
+    public void setContextoActivo(TipoContexto contextoActivo) {
+        this.contextoActivo = contextoActivo;
+    }
 }

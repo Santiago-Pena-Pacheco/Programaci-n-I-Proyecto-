@@ -28,13 +28,13 @@ public class Visitante extends Persona {
     }
 
     @Override
-    public String getEtiquetaTipo() {
-        return "Visitante";
+    public String getEtiquetaTipo(TipoContexto contexto) {
+        return contexto.getEtiquetaVisitante();
     }
 
     @Override
-    public void mostrarInformacion() {
-        super.mostrarInformacion();
+    public void mostrarInformacion(TipoContexto contexto) {
+        super.mostrarInformacion(contexto);
         System.out.println("apartamento destino = " + apartamentoDestino);
         System.out.println("parqueadero asignado = "
                 + (parqueaderoAsignado == null ? "NO HAY DISPONIBLE" : "#" + parqueaderoAsignado.getNumero()));
