@@ -1,9 +1,15 @@
 package com.github.santiago.fundamentos;
 
 /**
- * Superclase abstracta de las personas que interactuan con el conjunto:
- * centraliza nombre, cedula y vehiculo, y obliga a cada subclase a decir
- * como se llama su tipo (polimorfismo).
+ * Superclase abstracta que representa a cualquier persona que interactua
+ * con el sistema de control de acceso: un usuario fijo (propietario,
+ * empleado, personal de evento... segun el contexto) o un visitante
+ * temporal.
+ *
+ * Centraliza los atributos comunes (nombre, cedula, vehiculo) y define
+ * el contrato polimorfico que cada subclase debe resolver a su manera:
+ * como se le asigna un parqueadero, como se libera, y como se etiqueta
+ * y se muestra su informacion segun el TipoContexto activo del sistema.
  */
 public abstract class Persona {
 
@@ -37,7 +43,12 @@ public abstract class Persona {
         return vehiculo;
     }
 
-    /** Cada subclase decide como se llama segun el contexto activo (Propietario, Empleado, Cliente...). */
+    public abstract boolean asignarParqueadero(GestorParqueaderos gestor);
+
+    public abstract void liberarParqueadero();
+
+    public abstract Parqueadero getParqueaderoAsignado();
+
     public abstract String getEtiquetaTipo(TipoContexto contexto);
 
     public void mostrarInformacion(TipoContexto contexto) {

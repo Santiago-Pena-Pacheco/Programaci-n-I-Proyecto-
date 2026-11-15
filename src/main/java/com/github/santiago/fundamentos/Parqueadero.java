@@ -1,10 +1,12 @@
 package com.github.santiago.fundamentos;
 
 /**
- * Representa un espacio de parqueo. Puede ser el parqueadero fijo de un
- * apartamento (asignado a un propietario) o uno de los parqueaderos del
- * pool de visitantes.
+ * Representa un espacio de parqueo. Puede ser el parqueadero fijo asociado
+ * a una UbicacionDestino (asignado a un UsuarioFijo) o uno de los
+ * parqueaderos del pool de visitantes administrado por GestorParqueaderos.
  * El estado "ocupado" solo se modifica desde asignarVehiculo() y liberar().
+ *
+ * @author salas
  */
 public class Parqueadero {
 
