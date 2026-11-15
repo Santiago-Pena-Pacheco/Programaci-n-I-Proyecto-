@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Representa un incidente de seguridad reportado por el vigilante.
  * Solo se registra la descripcion; la fecha y hora se toman automaticamente.
  *
+ * @author salas
  */
 public class Incidente {
 

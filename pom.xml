@@ -4,36 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.santiago.fundamentos</groupId>
-    <artifactId>vigilante-interfaz</artifactId>
+    <groupId>com.github.santiago</groupId>
+    <artifactId>fundamentos</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
-    <name>vigilante-interfaz</name>
+    <name>ControlAcceso</name>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <exec.mainClass>com.github.santiago.fundamentos.InterfazVigilante</exec.mainClass>
+        <!-- El codigo usa text blocks (""") y String.formatted(): requiere Java 15 o superior -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <exec.mainClass>com.github.santiago.fundamentos.InterfazPrincipal</exec.mainClass>
     </properties>
-
-    <build>
-        <finalName>vigilante-interfaz</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.1</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.github.santiago.fundamentos.InterfazVigilante</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

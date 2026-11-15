@@ -1,7 +1,9 @@
 package com.github.santiago.fundamentos;
 
 /**
- * Representa un vehiculo, ya sea de un propietario o de un visitante.
+ * Representa un vehiculo, ya sea de un usuario fijo o de un visitante.
+ *
+ * @author salas
  */
 public class Vehiculo {
 
