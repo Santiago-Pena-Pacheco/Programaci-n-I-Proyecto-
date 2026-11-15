@@ -12,7 +12,7 @@ public class SistemaControlAcceso {
     private ArrayList<Propietario> propietarios;
     private ArrayList<Visitante> visitantes;
     private ArrayList<Incidente> incidentes;
-    private ArrayList<Parqueadero> parqueaderosVisitantes;
+    private GestorParqueaderos gestorParqueaderos;
 
     // Cantidad de parqueaderos de visitantes que se crean al iniciar el sistema
     private static final int CANTIDAD_PARQUEADEROS_VISITANTES = 10;
@@ -21,11 +21,7 @@ public class SistemaControlAcceso {
         this.propietarios = new ArrayList<>();
         this.visitantes = new ArrayList<>();
         this.incidentes = new ArrayList<>();
-        this.parqueaderosVisitantes = new ArrayList<>();
-
-        for (int i = 1; i <= CANTIDAD_PARQUEADEROS_VISITANTES; i++) {
-            this.parqueaderosVisitantes.add(new Parqueadero(i));
-        }
+        this.gestorParqueaderos = new GestorParqueaderos(CANTIDAD_PARQUEADEROS_VISITANTES);
     }
 
     /**
@@ -54,7 +50,7 @@ public class SistemaControlAcceso {
         Vehiculo vehiculo = new Vehiculo(placa);
         Visitante visitante = new Visitante(nombre, cedula, vehiculo, apartamentoDestino);
 
-        Parqueadero disponible = buscarParqueaderoVisitanteDisponible();
+        Parqueadero disponible = gestorParqueaderos.buscarParqueaderoVisitanteDisponible();
         if (disponible != null) {
             disponible.asignarVehiculo(placa);
             visitante.setParqueaderoAsignado(disponible);
@@ -104,12 +100,4 @@ public class SistemaControlAcceso {
         }
     }
 
-    private Parqueadero buscarParqueaderoVisitanteDisponible() {
-        for (Parqueadero p : parqueaderosVisitantes) {
-            if (p.estaDisponible()) {
-                return p;
-            }
-        }
-        return null;
-    }
 }
