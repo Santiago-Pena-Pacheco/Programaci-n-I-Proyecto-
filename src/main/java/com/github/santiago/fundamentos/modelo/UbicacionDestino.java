@@ -1,4 +1,4 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.modelo;
 
 /**
  * Abstraccion generica de un destino dentro de la zona controlada.

@@ -1,4 +1,4 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.modelo;
 
 /**
  * Roles soportados por el sistema de login.

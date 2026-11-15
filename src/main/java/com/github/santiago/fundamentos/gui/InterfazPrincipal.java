@@ -9,7 +9,15 @@
  * Toda la logica real vive en SistemaControlAcceso; esta clase solo
  * captura datos con JOptionPane y los envia.
  */
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.gui;
+
+import com.github.santiago.fundamentos.logica.SistemaControlAcceso;
+import com.github.santiago.fundamentos.modelo.Incidente;
+import com.github.santiago.fundamentos.modelo.Parqueadero;
+import com.github.santiago.fundamentos.modelo.Rol;
+import com.github.santiago.fundamentos.modelo.TipoContexto;
+import com.github.santiago.fundamentos.modelo.UsuarioFijo;
+import com.github.santiago.fundamentos.modelo.Visitante;
 
 import javax.swing.JOptionPane;
 

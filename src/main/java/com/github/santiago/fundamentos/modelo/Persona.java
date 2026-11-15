@@ -1,4 +1,6 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.modelo;
+
+import com.github.santiago.fundamentos.logica.GestorParqueaderos;
 
 /**
  * Superclase abstracta que representa a cualquier persona que interactua

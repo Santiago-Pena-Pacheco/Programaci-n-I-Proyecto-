@@ -1,4 +1,4 @@
-package com.github.santiago.fundamentos;
+package com.github.santiago.fundamentos.modelo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
