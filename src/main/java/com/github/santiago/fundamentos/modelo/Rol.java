@@ -1,7 +1,8 @@
 package com.github.santiago.fundamentos.modelo;
 
 /**
- * Roles soportados por el sistema de login.
+ * Rol de quien inicia sesion en el sistema. Define que ventana se abre
+ * despues del login.
  *
  * @author salas
  */
