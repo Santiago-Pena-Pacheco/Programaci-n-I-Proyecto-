@@ -1,63 +1,120 @@
 package com.github.santiago.fundamentos.modelo;
 
-import com.github.santiago.fundamentos.logica.GestorParqueaderos;
+import com.github.santiago.fundamentos.excepciones.DatoInvalidoException;
+import java.util.regex.Pattern;
 
 /**
- * Superclase abstracta que representa a cualquier persona que interactua
- * con el sistema de control de acceso: un usuario fijo (propietario,
- * empleado, personal de evento... segun el contexto) o un visitante
- * temporal.
+ * Clase padre abstracta que agrupa los atributos y comportamientos comunes
+ * a cualquier persona que interactua con el sistema (UsuarioFijo o Visitante).
+ * No puede instanciarse directamente: solo cobra sentido a traves de sus
+ * subclases concretas (Herencia + Abstraccion).
  *
- * Centraliza los atributos comunes (nombre, cedula, vehiculo) y define
- * el contrato polimorfico que cada subclase debe resolver a su manera:
- * como se le asigna un parqueadero, como se libera, y como se etiqueta
- * y se muestra su informacion segun el TipoContexto activo del sistema.
+ * Encapsulamiento: todos los atributos son privados; solo se cambian por
+ * medio de setters que validan el dato y lanzan DatoInvalidoException, asi
+ * una Persona nunca queda con un nombre vacio, una cedula mal formada o sin
+ * vehiculo.
+ *
+ * @author salas
  */
 public abstract class Persona {
 
-    protected String nombre;
-    protected String cedula;
-    protected Vehiculo vehiculo;
+    private static final Pattern CEDULA = Pattern.compile("[0-9]{5,12}");
 
-    public Persona(String nombre, String cedula, Vehiculo vehiculo) {
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.vehiculo = vehiculo;
+    private int id;
+    private String nombre;
+    private String cedula;
+    private Vehiculo vehiculo;
+    private Presencia presencia = Presencia.FUERA;
+
+    protected Persona(String nombre, String cedula, Vehiculo vehiculo) throws DatoInvalidoException {
+        setNombre(nombre);
+        setCedula(cedula);
+        setVehiculo(vehiculo);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String nombre) throws DatoInvalidoException {
+        this.nombre = validarNombre(nombre);
+    }
+
+    /** Devuelve el nombre limpio o lanza DatoInvalidoException (la usan los setters y la logica). */
+    public static String validarNombre(String nombre) throws DatoInvalidoException {
+        if (nombre == null || nombre.trim().length() < 3) {
+            throw new DatoInvalidoException("El nombre es obligatorio (mínimo 3 caracteres).");
+        }
+        return nombre.trim();
     }
 
     public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCedula(String cedula) throws DatoInvalidoException {
+        this.cedula = validarCedula(cedula);
+    }
+
+    public static String validarCedula(String cedula) throws DatoInvalidoException {
+        if (cedula == null || !CEDULA.matcher(cedula.trim()).matches()) {
+            throw new DatoInvalidoException("La cédula es obligatoria y debe tener solo números (5 a 12 dígitos).");
+        }
+        return cedula.trim();
     }
 
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
 
-    public abstract boolean asignarParqueadero(GestorParqueaderos gestor);
+    public void setVehiculo(Vehiculo vehiculo) throws DatoInvalidoException {
+        if (vehiculo == null) {
+            throw new DatoInvalidoException("El vehículo es obligatorio.");
+        }
+        this.vehiculo = vehiculo;
+    }
 
-    public abstract void liberarParqueadero();
+    public String getPlaca() {
+        return vehiculo.getPlaca();
+    }
 
-    public abstract Parqueadero getParqueaderoAsignado();
+    public Presencia getPresencia() {
+        return presencia;
+    }
 
-    public abstract String getEtiquetaTipo(TipoContexto contexto);
+    public void setPresencia(Presencia presencia) {
+        if (presencia == null) {
+            throw new IllegalArgumentException("La presencia no puede ser nula."); // error de programacion, no del usuario
+        }
+        this.presencia = presencia;
+    }
 
-    public void mostrarInformacion(TipoContexto contexto) {
-        System.out.println(" ====================== ");
-        System.out.println("tipo = " + getEtiquetaTipo(contexto));
-        System.out.println("nombre = " + nombre);
-        System.out.println("cedula = " + cedula);
-        System.out.println("placa vehiculo = " + vehiculo.getPlaca());
+    public boolean isDentro() {
+        return presencia == Presencia.DENTRO;
+    }
+
+    /** Nombre del tipo de persona para titulos y mensajes ("Propietario", "Visitante"...). */
+    public abstract String getTipoTexto(Escenario escenario);
+
+    /**
+     * Metodo abstracto: cada subclase decide COMO describe a donde va y donde
+     * parquea. Se invoca siempre a traves de una referencia Persona y el
+     * mismo mensaje produce un texto distinto segun el tipo real del objeto
+     * (UsuarioFijo vs Visitante), resuelto en tiempo de ejecucion
+     * (binding dinamico) = polimorfismo.
+     */
+    public abstract String getDetalleAcceso(Escenario escenario);
+
+    @Override
+    public String toString() {
+        return nombre + " (CC " + cedula + ") - Placa: " + vehiculo.getPlaca();
     }
 }

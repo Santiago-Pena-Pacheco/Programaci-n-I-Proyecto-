@@ -1,55 +1,42 @@
 package com.github.santiago.fundamentos.modelo;
 
-import com.github.santiago.fundamentos.logica.GestorParqueaderos;
-
 /**
- * Representa un espacio de parqueo. Puede ser el parqueadero fijo asociado
- * a una UbicacionDestino (asignado a un UsuarioFijo) o uno de los
- * parqueaderos del pool de visitantes administrado por GestorParqueaderos.
- * El estado "ocupado" solo se modifica desde asignarVehiculo() y liberar().
+ * Representa un espacio de parqueo. Puede ser el parqueadero fijo de una
+ * ubicacion (de su dueno) o uno de los parqueaderos del pool de visitantes.
+ * No guarda si esta ocupado: eso se deduce de quien esta DENTRO.
  *
  * @author salas
  */
 public class Parqueadero {
 
+    private int idParqueadero;
     private int numero;
-    private boolean ocupado;
-    private String placaVehiculoActual;
+    private TipoParqueadero tipo;
 
-    public Parqueadero(int numero) {
+    public Parqueadero(int numero, TipoParqueadero tipo) {
+        this(0, numero, tipo);
+    }
+
+    public Parqueadero(int idParqueadero, int numero, TipoParqueadero tipo) {
+        this.idParqueadero = idParqueadero;
         this.numero = numero;
-        this.ocupado = false;
-        this.placaVehiculoActual = null;
+        this.tipo = tipo;
+    }
+
+    public int getIdParqueadero() {
+        return idParqueadero;
+    }
+
+    public void setIdParqueadero(int idParqueadero) {
+        this.idParqueadero = idParqueadero;
     }
 
     public int getNumero() {
         return numero;
     }
 
-    public boolean isOcupado() {
-        return ocupado;
-    }
-
-    public String getPlacaVehiculoActual() {
-        return placaVehiculoActual;
-    }
-
-    public boolean asignarVehiculo(String placa) {
-        if (ocupado) {
-            return false;
-        }
-        this.ocupado = true;
-        this.placaVehiculoActual = placa;
-        return true;
-    }
-
-    public void liberar() {
-        this.ocupado = false;
-        this.placaVehiculoActual = null;
-    }
-
-    public boolean estaDisponible() {
-        return !ocupado;
+    public TipoParqueadero getTipo() {
+        return tipo;
     }
 
     @Override

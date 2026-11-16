@@ -1,72 +1,73 @@
 package com.github.santiago.fundamentos.modelo;
 
-import com.github.santiago.fundamentos.logica.GestorParqueaderos;
+import com.github.santiago.fundamentos.excepciones.DatoInvalidoException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
- * Representa a un visitante externo (temporal). Segun el TipoContexto
- * activo del sistema, esta MISMA clase se muestra en pantalla como
- * "Visitante" (residencial/oficina), "Cliente" (centro comercial) o
- * "Asistente" (concierto/evento).
- *
- * Su placa no esta registrada por ninguna ubicacion fija; se dirige a un
- * destino y el sistema le asigna automaticamente un parqueadero del pool
- * de visitantes.
+ * Representa a un visitante externo. Hereda de Persona los atributos comunes
+ * y anade el destino al que se dirige (apartamento, local, oficina... segun el
+ * escenario), el parqueadero temporal del pool de visitantes que se le asigno
+ * (el de su ultima visita) y su presencia. Sus datos se conservan para cuando
+ * regrese; el historial de visitas esta en los movimientos.
  *
  * @author salas
  */
 public class Visitante extends Persona {
 
+    private static final DateTimeFormatter FORMATO =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
     private String destino;
     private Parqueadero parqueaderoAsignado;
+    private LocalDateTime ultimoCambio = LocalDateTime.now();
 
-    public Visitante(String nombre, String cedula, Vehiculo vehiculo, String destino) {
+    public Visitante(String nombre, String cedula, Vehiculo vehiculo, String destino)
+            throws DatoInvalidoException {
         super(nombre, cedula, vehiculo);
-        this.destino = destino;
-        this.parqueaderoAsignado = null;
+        setDestino(destino);
     }
 
     public String getDestino() {
         return destino;
     }
 
-    /**
-     * A diferencia del usuario fijo, el visitante SI compite por un
-     * parqueadero libre del pool administrado por el gestor.
-     */
-    @Override
-    public boolean asignarParqueadero(GestorParqueaderos gestor) {
-        Parqueadero disponible = gestor.buscarParqueaderoVisitanteDisponible();
-        if (disponible == null) {
-            return false;
+    public void setDestino(String destino) throws DatoInvalidoException {
+        if (destino == null || destino.isBlank()) {
+            throw new DatoInvalidoException("El destino del visitante es obligatorio.");
         }
-        disponible.asignarVehiculo(vehiculo.getPlaca());
-        this.parqueaderoAsignado = disponible;
-        return true;
+        this.destino = destino.trim();
     }
 
-    @Override
-    public void liberarParqueadero() {
-        if (parqueaderoAsignado != null) {
-            parqueaderoAsignado.liberar();
-            parqueaderoAsignado = null;
-        }
-    }
-
-    @Override
     public Parqueadero getParqueaderoAsignado() {
         return parqueaderoAsignado;
     }
 
-    @Override
-    public String getEtiquetaTipo(TipoContexto contexto) {
-        return contexto.getEtiquetaVisitante();
+    public void setParqueaderoAsignado(Parqueadero parqueaderoAsignado) {
+        this.parqueaderoAsignado = parqueaderoAsignado;
+    }
+
+    public LocalDateTime getUltimoCambio() {
+        return ultimoCambio;
+    }
+
+    public void setUltimoCambio(LocalDateTime ultimoCambio) {
+        this.ultimoCambio = ultimoCambio;
+    }
+
+    public String getUltimoCambioTexto() {
+        return ultimoCambio == null ? "" : ultimoCambio.format(FORMATO);
     }
 
     @Override
-    public void mostrarInformacion(TipoContexto contexto) {
-        super.mostrarInformacion(contexto);
-        System.out.println("destino = " + destino);
-        System.out.println("parqueadero asignado = "
-                + (parqueaderoAsignado == null ? "NO HAY DISPONIBLE" : "#" + parqueaderoAsignado.getNumero()));
+    public String getTipoTexto(Escenario escenario) {
+        return "Visitante";
+    }
+
+    /** Implementacion del visitante: a donde va y su parqueadero TEMPORAL. */
+    @Override
+    public String getDetalleAcceso(Escenario escenario) {
+        return "Va a: " + escenario.getEtiquetaUbicacion() + " " + destino
+                + "\nParqueadero de visitante #" + parqueaderoAsignado.getNumero();
     }
 }

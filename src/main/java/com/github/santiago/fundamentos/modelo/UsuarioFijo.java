@@ -1,69 +1,78 @@
 package com.github.santiago.fundamentos.modelo;
 
-import com.github.santiago.fundamentos.logica.GestorParqueaderos;
+import com.github.santiago.fundamentos.excepciones.DatoInvalidoException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
- * Representa a una persona con vinculo permanente en la zona controlada.
- * Segun el TipoContexto activo del sistema, esta MISMA clase se muestra
- * en pantalla como "Propietario" (residencial), "Empleado" (oficina),
- * "Local Comercial" (centro comercial) o "Personal del Evento" (concierto)
- * — la clase no cambia, solo cambia la etiqueta que consulta del contexto.
- *
- * No requiere registro constante: se registra una vez (Vista Administrador)
- * y su parqueadero queda fijo, asociado a su UbicacionDestino.
+ * Persona con acceso permanente a un escenario: propietario en un conjunto,
+ * empleado en un centro comercial u oficina, personal en un concierto. El
+ * nombre concreto lo da la etiqueta del Escenario, no la clase. Hereda de
+ * Persona los atributos comunes y anade su Ubicacion (con su Parqueadero
+ * fijo), su estado (ACTIVO / INACTIVO: nunca se borra) y su presencia
+ * (DENTRO / FUERA).
  *
  * @author salas
  */
 public class UsuarioFijo extends Persona {
 
-    private UbicacionDestino ubicacion;
+    private static final DateTimeFormatter FORMATO =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-    public UsuarioFijo(String nombre, String cedula, Vehiculo vehiculo, UbicacionDestino ubicacion) {
+    private Ubicacion ubicacion;
+    private boolean activo = true;
+    private LocalDateTime fechaEstado = LocalDateTime.now(); // ultimo cambio de estado
+
+    public UsuarioFijo(String nombre, String cedula, Vehiculo vehiculo, Ubicacion ubicacion)
+            throws DatoInvalidoException {
         super(nombre, cedula, vehiculo);
-        this.ubicacion = ubicacion;
+        setUbicacion(ubicacion);
     }
 
-    public UbicacionDestino getUbicacion() {
+    public Ubicacion getUbicacion() {
         return ubicacion;
     }
 
-    /**
-     * Un usuario fijo no "compite" por un parqueadero del pool: ocupa el
-     * parqueadero que ya viene asociado a su ubicacion con la placa de
-     * su vehiculo.
-     */
-    @Override
-    public boolean asignarParqueadero(GestorParqueaderos gestor) {
-        Parqueadero fijo = ubicacion.getParqueaderoFijo();
-        if (fijo == null) {
-            return false;
+    public void setUbicacion(Ubicacion ubicacion) throws DatoInvalidoException {
+        if (ubicacion == null || ubicacion.getParqueadero() == null) {
+            throw new DatoInvalidoException("La ubicación y su parqueadero fijo son obligatorios.");
         }
-        return fijo.asignarVehiculo(vehiculo.getPlaca());
+        this.ubicacion = ubicacion;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public LocalDateTime getFechaEstado() {
+        return fechaEstado;
+    }
+
+    public void setFechaEstado(LocalDateTime fechaEstado) {
+        this.fechaEstado = fechaEstado;
+    }
+
+    public String getEstadoTexto() {
+        return activo ? "ACTIVO" : "INACTIVO";
+    }
+
+    public String getFechaEstadoTexto() {
+        return fechaEstado == null ? "" : fechaEstado.format(FORMATO);
     }
 
     @Override
-    public void liberarParqueadero() {
-        if (ubicacion.getParqueaderoFijo() != null) {
-            ubicacion.getParqueaderoFijo().liberar();
-        }
+    public String getTipoTexto(Escenario escenario) {
+        return escenario.getEtiquetaUsuarioFijo();
     }
 
+    /** Implementacion del usuario fijo: su ubicacion y su parqueadero FIJO. */
     @Override
-    public Parqueadero getParqueaderoAsignado() {
-        return ubicacion.getParqueaderoFijo();
-    }
-
-    @Override
-    public String getEtiquetaTipo(TipoContexto contexto) {
-        return contexto.getEtiquetaUsuarioFijo();
-    }
-
-    @Override
-    public void mostrarInformacion(TipoContexto contexto) {
-        super.mostrarInformacion(contexto);
-        Parqueadero fijo = ubicacion.getParqueaderoFijo();
-        System.out.println(contexto.getEtiquetaUbicacion() + " = " + ubicacion.getIdentificador());
-        System.out.println(contexto.getEtiquetaZona() + " = " + ubicacion.getZona());
-        System.out.println("parqueadero fijo = " + (fijo != null ? "#" + fijo.getNumero() : "SIN ASIGNAR"));
+    public String getDetalleAcceso(Escenario escenario) {
+        return ubicacion.descripcion(escenario)
+                + "\nParqueadero fijo #" + ubicacion.getParqueadero().getNumero();
     }
 }
