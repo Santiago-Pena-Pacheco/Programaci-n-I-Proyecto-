@@ -8,13 +8,12 @@
     <artifactId>fundamentos</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>ControlAcceso</name>
 
     <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- El codigo usa text blocks (""") y String.formatted(): requiere Java 15 o superior -->
-        <maven.compiler.release>17</maven.compiler.release>
-        <exec.mainClass>com.github.santiago.fundamentos.gui.InterfazPrincipal</exec.mainClass>
+        <exec.mainClass>com.github.santiago.fundamentos.App</exec.mainClass>
     </properties>
 
     <dependencies>
@@ -24,7 +23,7 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.4.0</version>
         </dependency>
-        <!-- Vision artificial: OpenCV empaquetado y OCR Tesseract -->
+        <!-- Las dos siguientes ya las usaba el proyecto: si su pom ya las tiene, deje las suyas -->
         <dependency>
             <groupId>org.openpnp</groupId>
             <artifactId>opencv</artifactId>
