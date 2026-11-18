@@ -1,22 +1,10 @@
--- =====================================================================
---  DATOS DE EJEMPLO para el escenario 1 (Conjunto residencial)
---
---  Importe primero control_acceso.sql y luego este archivo, UNA sola vez
---  (phpMyAdmin -> base control_acceso -> Importar). Todos los nombres,
---  cedulas y placas son inventados.
---
---  Contenido: 12 propietarios (10 activos, 5 de ellos DENTRO ahora, y 2 dados
---  de baja), 8 visitantes (4 DENTRO y 4 que ya salieron) y el historial de
---  ingresos y salidas correspondiente.
--- =====================================================================
+-- 02_datos_ejemplo.sql: datos inventados para el escenario 1 (conjunto residencial).
+-- Ejecutar una sola vez, despues de 01_estructura.sql.
 
 SET NAMES utf8mb4;
 USE control_acceso;
 
--- ---------------------------------------------------------------------
--- PROPIETARIOS (usuarios fijos): parqueadero fijo -> ubicacion -> usuario
---   ubicacion.codigo = apartamento, ubicacion.zona = torre
--- ---------------------------------------------------------------------
+-- Propietarios: parqueadero fijo, ubicacion (apartamento y torre) y usuario fijo
 
 -- Carlos Andrés Rodríguez - apto 101, torre 1, placa KJH451
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 1, 'FIJO');
@@ -27,7 +15,6 @@ INSERT INTO movimiento (id_escenario, tipo, fecha_hora, placa, tipo_persona, id_
 SELECT 1, 'INGRESO', NOW() - INTERVAL 20 MINUTE, uf.placa, 'USUARIO_FIJO', uf.id_usuario_fijo, uf.nombre, ub.id_parqueadero, 'CAMARA', 'Lectura de cámara'
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000101';
-
 
 -- María Fernanda Gómez - apto 102, torre 1, placa TRM238
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 2, 'FIJO');
@@ -44,7 +31,6 @@ SELECT 1, 'SALIDA', NOW() - INTERVAL 4 HOUR, uf.placa, 'USUARIO_FIJO', uf.id_usu
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000102';
 
-
 -- Juan Sebastián Pérez - apto 201, torre 1, placa BNQ764
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 3, 'FIJO');
 INSERT INTO ubicacion (id_escenario, codigo, zona, id_parqueadero) VALUES (1, '201', '1', LAST_INSERT_ID());
@@ -54,7 +40,6 @@ INSERT INTO movimiento (id_escenario, tipo, fecha_hora, placa, tipo_persona, id_
 SELECT 1, 'INGRESO', NOW() - INTERVAL 90 MINUTE, uf.placa, 'USUARIO_FIJO', uf.id_usuario_fijo, uf.nombre, ub.id_parqueadero, 'CAMARA', 'Lectura de cámara'
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000103';
-
 
 -- Laura Valentina Torres - apto 202, torre 1, placa GFD912
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 4, 'FIJO');
@@ -71,7 +56,6 @@ SELECT 1, 'SALIDA', NOW() - INTERVAL 4 HOUR, uf.placa, 'USUARIO_FIJO', uf.id_usu
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000104';
 
-
 -- Andrés Felipe Martínez - apto 301, torre 2, placa WXY305
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 5, 'FIJO');
 INSERT INTO ubicacion (id_escenario, codigo, zona, id_parqueadero) VALUES (1, '301', '2', LAST_INSERT_ID());
@@ -81,7 +65,6 @@ INSERT INTO movimiento (id_escenario, tipo, fecha_hora, placa, tipo_persona, id_
 SELECT 1, 'INGRESO', NOW() - INTERVAL 160 MINUTE, uf.placa, 'USUARIO_FIJO', uf.id_usuario_fijo, uf.nombre, ub.id_parqueadero, 'CAMARA', 'Lectura de cámara'
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000105';
-
 
 -- Diana Carolina Ramírez - apto 302, torre 2, placa PLK687
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 6, 'FIJO');
@@ -98,7 +81,6 @@ SELECT 1, 'SALIDA', NOW() - INTERVAL 4 HOUR, uf.placa, 'USUARIO_FIJO', uf.id_usu
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000106';
 
-
 -- Jorge Eduardo Castillo - apto 401, torre 2, placa MNB45C (moto)
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 7, 'FIJO');
 INSERT INTO ubicacion (id_escenario, codigo, zona, id_parqueadero) VALUES (1, '401', '2', LAST_INSERT_ID());
@@ -108,7 +90,6 @@ INSERT INTO movimiento (id_escenario, tipo, fecha_hora, placa, tipo_persona, id_
 SELECT 1, 'INGRESO', NOW() - INTERVAL 230 MINUTE, uf.placa, 'USUARIO_FIJO', uf.id_usuario_fijo, uf.nombre, ub.id_parqueadero, 'CAMARA', 'Lectura de cámara'
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000107';
-
 
 -- Sandra Milena Herrera - apto 402, torre 2, placa ZAQ574
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 8, 'FIJO');
@@ -125,7 +106,6 @@ SELECT 1, 'SALIDA', NOW() - INTERVAL 4 HOUR, uf.placa, 'USUARIO_FIJO', uf.id_usu
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000108';
 
-
 -- Luis Alberto Vargas - apto 501, torre 3, placa CVB850
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 9, 'FIJO');
 INSERT INTO ubicacion (id_escenario, codigo, zona, id_parqueadero) VALUES (1, '501', '3', LAST_INSERT_ID());
@@ -135,7 +115,6 @@ INSERT INTO movimiento (id_escenario, tipo, fecha_hora, placa, tipo_persona, id_
 SELECT 1, 'INGRESO', NOW() - INTERVAL 300 MINUTE, uf.placa, 'USUARIO_FIJO', uf.id_usuario_fijo, uf.nombre, ub.id_parqueadero, 'CAMARA', 'Lectura de cámara'
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000109';
-
 
 -- Paola Andrea Moreno - apto 502, torre 3, placa RTY33F (moto)
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 10, 'FIJO');
@@ -152,7 +131,6 @@ SELECT 1, 'SALIDA', NOW() - INTERVAL 4 HOUR, uf.placa, 'USUARIO_FIJO', uf.id_usu
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000110';
 
-
 -- Camilo José Ortiz - apto 601, torre 3, placa UIO296
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 11, 'FIJO');
 INSERT INTO ubicacion (id_escenario, codigo, zona, id_parqueadero) VALUES (1, '601', '3', LAST_INSERT_ID());
@@ -167,7 +145,6 @@ INSERT INTO movimiento (id_escenario, tipo, fecha_hora, placa, tipo_persona, id_
 SELECT 1, 'SALIDA', NOW() - INTERVAL 10 DAY, uf.placa, 'USUARIO_FIJO', uf.id_usuario_fijo, uf.nombre, ub.id_parqueadero, 'CAMARA', 'Lectura de cámara'
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000111';
-
 
 -- Natalia Sofía Duarte - apto 602, torre 3, placa EDC618
 INSERT INTO parqueadero (id_escenario, numero, tipo) VALUES (1, 12, 'FIJO');
@@ -184,15 +161,12 @@ SELECT 1, 'SALIDA', NOW() - INTERVAL 10 DAY, uf.placa, 'USUARIO_FIJO', uf.id_usu
   FROM usuario_fijo uf JOIN ubicacion ub ON ub.id_ubicacion = uf.id_ubicacion
  WHERE uf.id_escenario = 1 AND uf.cedula = '1001000112';
 
-
--- Baja logica (igual que el boton "Dar de baja"): no se borra, cambia de estado
+-- Baja logica: dos propietarios pasan a INACTIVO (no se borran)
 UPDATE usuario_fijo
    SET estado = 'INACTIVO', baja_id = id_usuario_fijo, fecha_estado = NOW() - INTERVAL 10 DAY
  WHERE id_escenario = 1 AND cedula IN ('1001000111', '1001000112');
 
--- ---------------------------------------------------------------------
--- VISITANTES (los parqueaderos de visitantes 1..10 los crea control_acceso.sql)
--- ---------------------------------------------------------------------
+-- Visitantes (usan los parqueaderos de visitantes 1 a 10 creados en 01_estructura.sql)
 
 -- Pedro Pablo Salazar -> 101 (DENTRO)
 INSERT INTO visitante (id_escenario, nombre, cedula, placa, destino, id_parqueadero, presencia, ultimo_cambio)
@@ -274,10 +248,7 @@ INSERT INTO movimiento (id_escenario, tipo, fecha_hora, placa, tipo_persona, id_
 SELECT 1, 'SALIDA', NOW() - INTERVAL 3 DAY - INTERVAL 3 HOUR, v.placa, 'VISITANTE', v.id_visitante, v.nombre, v.id_parqueadero, 'CAMARA', 'Lectura de cámara'
   FROM visitante v WHERE v.id_escenario = 1 AND v.placa = 'VCX024';
 
-
--- ---------------------------------------------------------------------
--- INCIDENTES (reportados por el vigilante de ejemplo)
--- ---------------------------------------------------------------------
+-- Incidentes reportados por el vigilante
 INSERT INTO incidente (id_escenario, fecha_hora, id_usuario_sistema, reportado_por, tipo, gravedad, lugar,
                        placa, persona_involucrada, descripcion, acciones_tomadas, estado, observacion_admin, fecha_estado)
 SELECT 1, NOW() - INTERVAL 2 DAY, u.id_usuario_sistema, u.nombre, 'DANO_A_VEHICULO', 'MEDIA', 'Parqueadero 4, sótano',
