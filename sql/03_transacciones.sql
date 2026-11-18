@@ -1,5 +1,5 @@
 -- 03_transacciones.sql: SELECT, INSERT, UPDATE y DELETE dentro de START TRANSACTION,
--- cerrados con COMMIT o ROLLBACK. Ejecutar después de 02_datos_ejemplo.sql.
+-- cerrados con COMMIT o ROLLBACK. Ejecutar después de 01_inicializacion.sql.
 -- Caso de prueba: el visitante Mario Test (placa QWE123) en el escenario 1.
 
 USE control_acceso;
