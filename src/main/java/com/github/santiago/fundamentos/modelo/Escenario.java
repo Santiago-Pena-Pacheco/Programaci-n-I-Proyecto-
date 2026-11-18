@@ -1,16 +1,6 @@
 package com.github.santiago.fundamentos.modelo;
 
-/**
- * Contexto de uso del sistema (conjunto residencial, centro comercial,
- * concierto, oficinas...). Es lo que hace escalable al proyecto: el codigo
- * es el mismo para todos y lo unico que cambia son estas etiquetas y la
- * cantidad de parqueaderos de visitantes, que viven en la base de datos.
- *
- * Ejemplo residencial: usuarioFijo = "Propietario", ubicacion = "Apartamento",
- * zona = "Torre". Ejemplo concierto: "Personal", "Puesto", "Zona".
- *
- * @author salas
- */
+/** Contexto de uso del sistema (conjunto residencial, centro comercial, concierto, oficinas...) */
 public class Escenario {
 
     private int idEscenario;

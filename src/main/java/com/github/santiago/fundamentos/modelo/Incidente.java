@@ -3,13 +3,7 @@ package com.github.santiago.fundamentos.modelo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Reporte de seguridad hecho por un vigilante. Ningun dato es opcional: si no
- * hay vehiculo o persona involucrada se escribe "N/A" (SIN_DATO). La fecha y
- * hora y el nombre de quien reporta los pone el sistema, no se digitan.
- *
- * @author salas
- */
+/** Reporte de seguridad hecho por un vigilante */
 public class Incidente {
 
     /** Valor de placa o persona cuando el incidente no involucra vehiculo o persona. */

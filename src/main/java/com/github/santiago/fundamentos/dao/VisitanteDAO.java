@@ -4,10 +4,7 @@ import com.github.santiago.fundamentos.modelo.Visitante;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Consultas y edicion de visitantes. Sus ingresos y salidas (que cambian la
- * presencia) los hace AccesoDAO.
- */
+/** Consultas y edicion de visitantes */
 public interface VisitanteDAO {
 
     // Listar los visitantes guardados de un escenario, los de movimiento mas reciente primero

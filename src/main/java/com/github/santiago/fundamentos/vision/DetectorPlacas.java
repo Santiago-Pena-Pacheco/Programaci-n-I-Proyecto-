@@ -21,24 +21,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/**
- * Version en Java (OpenCV + Tess4J) de la logica que antes vivia en
- * "Proyecto-fundamentos_definitivo.py". Reproduce el mismo pipeline:
- *
- *  1) Se toma una region de interes (ROI) central del frame.
- *  2) Se pasa a escala de grises, se suaviza y se detectan bordes (Canny).
- *  3) Se buscan contornos rectangulares con el area y el aspect-ratio
- *     tipico de una placa (2.0 - 5.5) y con 4 esquinas al aproximar el
- *     poligono (approxPolyDP).
- *  4) La sub-imagen de la placa se binariza (umbral adaptativo) y se
- *     envia a Tesseract con una whitelist de caracteres alfanumericos.
- *  5) El texto solo se da por "confirmado" cuando se repite igual varias
- *     veces seguidas (buffer de lecturas), igual que confirmar_placa()
- *     en el script original, y ademas calza con el patron de placas
- *     colombianas de carro (AAA123) o moto (AAA12A).
- *
- * @author salas
- */
+/** Version en Java (OpenCV + Tess4J) de la logica que antes vivia en "Proyecto-fundamentos_definitivo.py" */
 public class DetectorPlacas implements AutoCloseable {
 
     private static final Pattern PATRON_CARRO = Pattern.compile("^[A-Z]{3}[0-9]{3}$");
@@ -53,11 +36,7 @@ public class DetectorPlacas implements AutoCloseable {
     private final ITesseract tesseract;
     private final Deque<String> lecturasRecientes = new ArrayDeque<>();
 
-    /**
-     * @param rutaTessdata carpeta que contiene los archivos .traineddata
-     *                     (por ejemplo "C:/Program Files/Tesseract-OCR/tessdata"
-     *                     o "/usr/share/tesseract-ocr/5/tessdata" en Linux).
-     */
+    /** (por ejemplo "C:/Program Files/Tesseract-OCR/tessdata" o "/usr/share/tesseract-ocr/5/tessdata" en Linux) */
     public DetectorPlacas(String rutaTessdata) {
         this.tesseract = new Tesseract();
         this.tesseract.setDatapath(rutaTessdata);
@@ -66,10 +45,7 @@ public class DetectorPlacas implements AutoCloseable {
         this.tesseract.setVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
     }
 
-    /**
-     * Procesa un frame completo (BGR, como lo entrega VideoCapture) y
-     * devuelve el resultado de la deteccion para ese frame.
-     */
+    /** Procesa un frame completo (BGR, como lo entrega VideoCapture) y devuelve el resultado de la deteccion para ese frame */
     public ResultadoDeteccion procesarFrame(Mat frame) {
         int ancho = frame.cols();
         int alto = frame.rows();
@@ -159,11 +135,7 @@ public class DetectorPlacas implements AutoCloseable {
         return confirmarPlaca(texto);
     }
 
-    /**
-     * Buffer de confirmacion: equivalente a confirmar_placa() en Python.
-     * Solo se acepta una lectura cuando las ultimas N lecturas coinciden
-     * Y ademas el texto respeta el formato de placa colombiana.
-     */
+    /** Buffer de confirmacion: equivalente a confirmar_placa() en Python */
     private String confirmarPlaca(String textoDetectado) {
         if (textoDetectado.isEmpty()) {
             return null;

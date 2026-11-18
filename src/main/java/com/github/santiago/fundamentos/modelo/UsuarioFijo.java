@@ -4,16 +4,7 @@ import com.github.santiago.fundamentos.excepciones.DatoInvalidoException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Persona con acceso permanente a un escenario: propietario en un conjunto,
- * empleado en un centro comercial u oficina, personal en un concierto. El
- * nombre concreto lo da la etiqueta del Escenario, no la clase. Hereda de
- * Persona los atributos comunes y anade su Ubicacion (con su Parqueadero
- * fijo), su estado (ACTIVO / INACTIVO: nunca se borra) y su presencia
- * (DENTRO / FUERA).
- *
- * @author salas
- */
+/** Persona con acceso permanente a un escenario */
 public class UsuarioFijo extends Persona {
 
     private static final DateTimeFormatter FORMATO =

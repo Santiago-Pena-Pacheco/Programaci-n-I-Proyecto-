@@ -4,14 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * SINGLETON (patron creacional): existe una unica instancia de Conexion en toda
- * la aplicacion, que guarda los datos de acceso a MySQL (XAMPP) y entrega una
- * conexion nueva a cada DAO. Todos los DAO la usan a traves de getConexion();
- * si cambia el servidor o la clave, solo se edita esta clase.
- *
- * @author salas
- */
+/** SINGLETON (patron creacional) */
 public final class Conexion {
 
     private static final String URL
@@ -46,7 +39,7 @@ public final class Conexion {
             // Se captura la excepcion original y se lanza una con un mensaje claro
             throw new SQLException("No se pudo conectar a la base de datos 'control_acceso'.\n"
                     + "Verifique que MySQL este encendido en XAMPP, que haya importado "
-                    + "sql/control_acceso.sql y que el usuario y la clave sean correctos.\n"
+                    + "sql/01_estructura.sql y que el usuario y la clave sean correctos.\n"
                     + "Detalle: " + e.getMessage(), e);
         }
     }

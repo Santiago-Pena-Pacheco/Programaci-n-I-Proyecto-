@@ -12,16 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
-/**
- * Dialogo modal para registrar un visitante. Puede abrirse de dos formas:
- *  - Manualmente desde el menu lateral (placa vacia, por si la camara no leyo).
- *  - Automaticamente cuando la camara detecta una placa que NO pertenece
- *    a ningun usuario fijo ni a un visitante que siga adentro: en ese caso
- *    llega con el campo de placa ya prellenado.
- * La etiqueta del destino (Apartamento, Local, Oficina...) sale del Escenario.
- *
- * @author salas
- */
+/** Dialogo modal para registrar un visitante */
 public class FormularioVisitante extends JDialog {
 
     private final JTextField campoPlaca = new JTextField();

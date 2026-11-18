@@ -2,11 +2,7 @@ package com.github.santiago.fundamentos.video;
 
 import org.opencv.core.Mat;
 
-/**
- * Lo minimo que la aplicacion necesita de una fuente de video. Es la interfaz
- * "objetivo" del patron Adapter: FuenteOpenCV y FuenteMjpeg la implementan, y
- * PanelCamara trabaja solo con este tipo, sin saber de donde viene la imagen.
- */
+/** Lo minimo que la aplicacion necesita de una fuente de video */
 public interface FuenteVideo {
 
     boolean isOpened();

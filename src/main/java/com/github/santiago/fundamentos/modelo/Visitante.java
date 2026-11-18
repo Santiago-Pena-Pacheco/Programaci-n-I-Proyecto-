@@ -4,15 +4,7 @@ import com.github.santiago.fundamentos.excepciones.DatoInvalidoException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Representa a un visitante externo. Hereda de Persona los atributos comunes
- * y anade el destino al que se dirige (apartamento, local, oficina... segun el
- * escenario), el parqueadero temporal del pool de visitantes que se le asigno
- * (el de su ultima visita) y su presencia. Sus datos se conservan para cuando
- * regrese; el historial de visitas esta en los movimientos.
- *
- * @author salas
- */
+/** Representa a un visitante externo */
 public class Visitante extends Persona {
 
     private static final DateTimeFormatter FORMATO =

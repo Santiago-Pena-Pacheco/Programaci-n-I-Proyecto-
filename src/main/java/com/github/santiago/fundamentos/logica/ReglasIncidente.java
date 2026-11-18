@@ -5,14 +5,7 @@ import com.github.santiago.fundamentos.modelo.EstadoIncidente;
 import com.github.santiago.fundamentos.modelo.Incidente;
 import com.github.santiago.fundamentos.modelo.Vehiculo;
 
-/**
- * Reglas de cada dato de un reporte de incidente. Las usan tanto el formulario
- * (paso por paso, para avisar el error en el momento) como SistemaControlAcceso
- * (que vuelve a validar todo antes de guardar). Cada metodo devuelve el dato
- * limpio o lanza DatoInvalidoException con el mensaje para el usuario.
- *
- * @author salas
- */
+/** Reglas de cada dato de un reporte de incidente */
 public final class ReglasIncidente {
 
     private ReglasIncidente() {

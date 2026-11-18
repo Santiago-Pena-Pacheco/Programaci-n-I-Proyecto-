@@ -3,12 +3,7 @@ package com.github.santiago.fundamentos.modelo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Un vehiculo que esta DENTRO ahora mismo (de un usuario fijo o de un
- * visitante), con la hora en que entro y cuanto lleva adentro.
- *
- * @author salas
- */
+/** Un vehiculo que esta DENTRO ahora mismo (de un usuario fijo o de un visitante), con la hora en que entro y cuanto lleva adentro */
 public class VehiculoAdentro {
 
     private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");

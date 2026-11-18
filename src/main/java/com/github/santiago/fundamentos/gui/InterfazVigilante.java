@@ -18,22 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Ventana principal del vigilante. Trabaja siempre sobre el escenario que el
- * administrador dejo activo, con:
- *   - Un menu lateral con las acciones del vigilante (visitantes, incidentes,
- *     registros). El registro de usuarios fijos es del administrador.
- *   - Un panel central que muestra el feed de la camara en tiempo real
- *     y reconoce placas automaticamente.
- *
- * Cuando la camara confirma una placa, el sistema alterna su estado
- * DENTRO/FUERA: la primera lectura es un ingreso y la siguiente una salida,
- * ambas automaticas (el vigilante NO reporta salidas). El vigilante solo
- * interviene si la placa es de un visitante nuevo (llena el formulario) o
- * de un visitante conocido que regresa (confirma su destino).
- *
- * @author salas
- */
+/** Ventana principal del vigilante */
 public class InterfazVigilante extends JFrame {
 
     private final SistemaControlAcceso sistema;
@@ -156,12 +141,7 @@ public class InterfazVigilante extends JFrame {
         panelCamara.iniciar(fuente.trim(), rutaTessdata.trim());
     }
 
-    /**
-     * Busca la carpeta 'tessdata' (la que contiene eng.traineddata) junto al
-     * programa, sin importar si la carpeta de Tesseract se llama "Tesseract-OCR",
-     * "tesseract", etc. Mira en la carpeta desde donde se ejecuta el programa,
-     * en su carpeta padre y en la del propio codigo/jar. Retorna null si no hay.
-     */
+    /** Busca la carpeta 'tessdata' (la que contiene eng.traineddata) junto al programa, sin importar si la carpeta de Tesseract se llama "Tesseract-OCR", "tesseract", etc */
     private static File buscarTessdata() {
         List<File> raices = new ArrayList<>();
         File actual = new File(System.getProperty("user.dir"));
@@ -236,12 +216,7 @@ public class InterfazVigilante extends JFrame {
         new FormularioIncidente(this, sistema, sesion).setVisible(true);
     }
 
-    /**
-     * Callback invocado por PanelCamara cada vez que se confirma una placa.
-     * La decision (ingreso, salida, denegado...) la toma SistemaControlAcceso
-     * segun el estado DENTRO/FUERA; aqui solo se muestra el resultado y, si
-     * hace falta, se piden al vigilante los datos de un visitante.
-     */
+    /** Callback invocado por PanelCamara cada vez que se confirma una placa */
     private void onPlacaConfirmada(String placa) {
         try {
             ResultadoAcceso r = sistema.procesarPlaca(placa);

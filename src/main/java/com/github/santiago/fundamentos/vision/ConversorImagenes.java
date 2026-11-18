@@ -6,15 +6,7 @@ import org.opencv.core.Mat;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
-/**
- * Utilidades de conversion entre Mat (OpenCV) y BufferedImage (Java AWT/Swing).
- * Se necesita en dos puntos:
- *  - Para mostrar el frame de la camara dentro de un JLabel en la GUI.
- *  - Para entregarle la sub-imagen de la placa ya binarizada a Tess4J,
- *    que trabaja con BufferedImage en vez de Mat.
- *
- * @author salas
- */
+/** Utilidades de conversion entre Mat (OpenCV) y BufferedImage (Java AWT/Swing) */
 public final class ConversorImagenes {
 
     private ConversorImagenes() {

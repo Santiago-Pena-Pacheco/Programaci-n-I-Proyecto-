@@ -39,20 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Logica de negocio de UN escenario. El corazon es procesarPlaca(): cada vez
- * que la camara lee una placa se consulta la PRESENCIA de su duenio y se
- * alterna (FUERA -> DENTRO es un ingreso, DENTRO -> FUERA es una salida).
- * Las salidas las detecta siempre la camara; el vigilante solo interviene
- * para registrar a un visitante que llega.
- *
- * Todos los datos son obligatorios y se validan aqui (y la base de datos lo
- * vuelve a exigir con NOT NULL y CHECK). Los errores de validacion se avisan
- * con DatoInvalidoException; las reglas de estado (sin cupo, ya adentro)
- * con ReglaNegocioException; ambos con mensaje listo para mostrar.
- *
- * @author salas
- */
+/** Logica de negocio de UN escenario */
 public class SistemaControlAcceso {
 
     /** Tiempo durante el cual se ignora una placa recien leida (el carro sigue frente a la camara). */
@@ -88,17 +75,8 @@ public class SistemaControlAcceso {
 
     // ------------------------------------------------------------------
     //  CONTROL DE ACCESO POR PLACA (lo llama la camara)
-    // ------------------------------------------------------------------
 
-    /**
-     * Decide que pasa con una placa leida por la camara:
-     *  - usuario fijo activo: alterna su presencia (ingreso o salida automatica)
-     *  - usuario fijo dado de baja: DENEGADO
-     *  - visitante que esta DENTRO: salida automatica
-     *  - visitante conocido que esta FUERA: VISITANTE_REGRESA (solo se confirma su destino)
-     *  - placa desconocida: VISITANTE_NUEVO (el vigilante registra sus datos)
-     *  - la misma placa dentro del tiempo de espera, o un texto que no es una placa: IGNORADA
-     */
+    /** Decide que pasa con una placa leida por la camara */
     public ResultadoAcceso procesarPlaca(String placaLeida) throws SQLException, ControlAccesoException {
         String placa = Vehiculo.normalizarPlaca(placaLeida);
         int id = escenario.getIdEscenario();
@@ -142,10 +120,7 @@ public class SistemaControlAcceso {
         return ResultadoAcceso.deVisitante(Tipo.VISITANTE_REGRESA, placa, visitante);
     }
 
-    /**
-     * Ingreso de un visitante NUEVO (placa desconocida): queda guardado con todos
-     * sus datos y se le asigna un parqueadero libre del pool.
-     */
+    /** Ingreso de un visitante NUEVO (placa desconocida): queda guardado con todos sus datos y se le asigna un parqueadero libre del pool */
     public Visitante registrarIngresoVisitante(String placa, String nombre, String cedula, String destino)
             throws SQLException, ControlAccesoException {
         return registrarIngresoVisitante(placa, nombre, cedula, destino, Origen.CAMARA);
@@ -179,7 +154,6 @@ public class SistemaControlAcceso {
 
     // ------------------------------------------------------------------
     //  USUARIOS FIJOS (administrador)
-    // ------------------------------------------------------------------
 
     public UsuarioFijo registrarUsuarioFijo(String nombre, String cedula, String codigoUbicacion,
             String zona, int numeroParqueadero, String placa) throws SQLException, ControlAccesoException {
@@ -244,7 +218,6 @@ public class SistemaControlAcceso {
 
     // ------------------------------------------------------------------
     //  VISITANTES, INCIDENTES Y ESCENARIO (administrador)
-    // ------------------------------------------------------------------
 
     public Visitante actualizarVisitante(int idVisitante, String nombre, String cedula, String placa,
             String destino) throws SQLException, ControlAccesoException {
@@ -266,10 +239,7 @@ public class SistemaControlAcceso {
         return v;
     }
 
-    /**
-     * Registra un incidente. La fecha y hora y el nombre de quien reporta no se digitan:
-     * la hora la pone la base de datos y el nombre sale de la sesion del vigilante.
-     */
+    /** Registra un incidente */
     public Incidente reportarIncidente(UsuarioSistema vigilante, TipoIncidente tipo, GravedadIncidente gravedad,
             String lugar, String placa, String persona, String descripcion, String acciones)
             throws SQLException, ControlAccesoException {
@@ -299,10 +269,7 @@ public class SistemaControlAcceso {
         incidenteDAO.actualizar(escenario.getIdEscenario(), original);
     }
 
-    /**
-     * Ayuda del formulario: dada la placa del vehiculo afectado, dice de quien es
-     * (usuario fijo o visitante registrado) para sugerir la persona involucrada.
-     */
+    /** Ayuda del formulario: dada la placa del vehiculo afectado, dice de quien es (usuario fijo o visitante registrado) para sugerir */
     public Optional<String> buscarDuenoDePlaca(String placa) throws SQLException {
         String p = Vehiculo.normalizarPlaca(placa);
         if (!Vehiculo.esPlacaValida(p)) {
@@ -337,10 +304,7 @@ public class SistemaControlAcceso {
         escenarioDAO.actualizar(escenario);
     }
 
-    /**
-     * Correccion del administrador cuando la camara no alcanzo a leer una placa
-     * y el estado quedo desfasado. Queda en el historial con origen MANUAL.
-     */
+    /** Correccion del administrador cuando la camara no alcanzo a leer una placa y el estado quedo desfasado */
     public boolean corregirPresencia(Persona persona, Presencia nueva) throws SQLException, ControlAccesoException {
         String detalle = "Correccion manual del administrador";
         if (persona instanceof UsuarioFijo) {
@@ -351,7 +315,6 @@ public class SistemaControlAcceso {
 
     // ------------------------------------------------------------------
     //  CONSULTAS
-    // ------------------------------------------------------------------
 
     public List<UsuarioFijo> getUsuariosFijos() throws SQLException {
         return getUsuariosFijos(false);
@@ -384,7 +347,6 @@ public class SistemaControlAcceso {
 
     // ------------------------------------------------------------------
     //  VALIDACIONES
-    // ------------------------------------------------------------------
 
     private String validarPlaca(String placa) throws DatoInvalidoException {
         return Vehiculo.validarPlaca(placa);

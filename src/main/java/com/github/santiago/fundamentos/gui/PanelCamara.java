@@ -15,19 +15,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Panel central de la GUI: muestra en tiempo real el feed de la camara de
- * seguridad, dibuja un recuadro sobre la placa cuando se detecta, y avisa
- * (via callback) cuando una placa queda CONFIRMADA para que la ventana
- * principal decida si autoriza el acceso o abre el formulario de visitante.
- *
- * La fuente de video puede ser un numero de camara, un archivo de video o la
- * direccion http:// de una transmision MJPEG (por ejemplo la app IP Webcam del
- * celular). Las direcciones http se leen directamente en Java, sin depender del
- * soporte de red de OpenCV.
- *
- * @author salas
- */
+/** Panel central de la GUI: muestra en tiempo real el feed de la camara de seguridad, dibuja un recuadro sobre la placa cuando se */
 public class PanelCamara extends JPanel {
 
     /** Interfaz del OBSERVER. Se invoca en el hilo de Swing (EDT) cada vez que se confirma una placa nueva. */
@@ -73,20 +61,12 @@ public class PanelCamara extends JPanel {
         }
     }
 
-    /**
-     * Inicia la captura de la camara (indice 0 = camara por defecto) y el
-     * detector de placas apuntando a la carpeta tessdata indicada.
-     */
+    /** Inicia la captura de la camara (indice 0 = camara por defecto) y el detector de placas apuntando a la carpeta tessdata indicada */
     public void iniciar(int indiceCamara, String rutaTessdata) {
         iniciar(String.valueOf(indiceCamara), rutaTessdata);
     }
 
-    /**
-     * Igual que el anterior, pero la fuente puede ser un numero de camara
-     * ("0", "1"...), la ruta de un video, o la direccion de una transmision por
-     * red ("http://192.168.1.20:8080/video"), lo que permite usar la camara de un
-     * celular por Wi-Fi sin instalar controladores.
-     */
+    /** Igual que el anterior, pero la fuente puede ser un numero de camara ("0", "1"...), la ruta de un video, o la direccion de una transmision por red ("http */
     public void iniciar(String fuente, String rutaTessdata) {
         detener();
 
@@ -175,5 +155,4 @@ public class PanelCamara extends JPanel {
 
     // ------------------------------------------------------------------
     //  Fuentes de video
-    // ------------------------------------------------------------------
 }

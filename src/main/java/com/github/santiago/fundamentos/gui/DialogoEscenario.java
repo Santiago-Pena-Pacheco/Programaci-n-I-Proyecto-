@@ -8,13 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
-/**
- * Dialogo modal para crear un escenario nuevo. Aqui es donde el sistema se
- * "escala": se define como se llaman las cosas en el nuevo contexto y cuantos
- * parqueaderos de visitantes tiene, sin tocar el codigo del programa.
- *
- * @author salas
- */
+/** Dialogo modal para crear un escenario nuevo */
 public class DialogoEscenario extends JDialog {
 
     private final EscenarioDAO escenarioDAO;

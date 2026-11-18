@@ -13,12 +13,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-/**
- * ADAPTER (patron estructural): adapta un flujo HTTP MJPEG a la interfaz
- * FuenteVideo. Transmision MJPEG por HTTP (IP Webcam, DroidCam...). Un hilo en segundo
- * plano lee el flujo, separa los JPEG buscando sus marcas de inicio (FF D8)
- * y fin (FF D9) y se queda con el ultimo; read() lo decodifica con OpenCV.
- */
+/** ADAPTER (patron estructural): adapta un flujo HTTP MJPEG a la interfaz FuenteVideo */
 public final class FuenteMjpeg implements FuenteVideo {
 
     private static final int TIEMPO_SIN_IMAGEN_MS = 15000;

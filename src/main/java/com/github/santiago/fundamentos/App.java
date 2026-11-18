@@ -10,12 +10,7 @@ import javax.swing.SwingUtilities;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- * Punto de entrada del programa: carga OpenCV, comprueba la conexion con
- * MySQL antes de abrir nada y muestra la ventana de login.
- *
- * @author salas
- */
+/** Punto de entrada del programa: carga OpenCV, comprueba la conexion con MySQL antes de abrir nada y muestra la ventana de login */
 public class App {
 
     public static void main(String[] args) {

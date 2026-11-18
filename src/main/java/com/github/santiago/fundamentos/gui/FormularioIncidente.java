@@ -19,21 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Reporte de incidente paso a paso. El orden de captura es siempre el mismo:
- *   1. Que ocurrio        (tipo y gravedad)
- *   2. Donde y cuando     (lugar; la hora y quien reporta se ponen solos)
- *   3. Vehiculo y persona (placa afectada y persona involucrada; "N/A" si no hay)
- *   4. Detalle            (que paso y que acciones se tomaron)
- *   5. Seguimiento        (solo al modificar, lo hace el administrador)
- *   6. Revision           (resumen completo antes de guardar)
- * Cada paso se valida antes de pasar al siguiente. Ningun dato es opcional.
- *
- * Se abre en dos modos: vigilante que reporta uno nuevo, o administrador que
- * modifica uno existente (la fecha y quien lo reporto no se pueden cambiar).
- *
- * @author salas
- */
+/** Reporte de incidente paso a paso */
 public class FormularioIncidente extends JDialog {
 
     private final SistemaControlAcceso sistema;
@@ -121,7 +107,6 @@ public class FormularioIncidente extends JDialog {
 
     // ------------------------------------------------------------------
     //  Pasos
-    // ------------------------------------------------------------------
 
     private void agregarPaso(String titulo, JComponent contenido) {
         titulos.add(titulo);
@@ -211,7 +196,6 @@ public class FormularioIncidente extends JDialog {
 
     // ------------------------------------------------------------------
     //  Comportamiento
-    // ------------------------------------------------------------------
 
     private void configurarComportamiento() {
         comboGravedad.addActionListener(e -> mostrarAyudaGravedad());
@@ -415,7 +399,6 @@ public class FormularioIncidente extends JDialog {
 
     // ------------------------------------------------------------------
     //  Auxiliares de dibujo
-    // ------------------------------------------------------------------
 
     private static JPanel formulario() {
         JPanel p = new JPanel();

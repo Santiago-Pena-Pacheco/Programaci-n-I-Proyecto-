@@ -3,13 +3,7 @@ package com.github.santiago.fundamentos.modelo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Una fila del historial de ingresos y salidas. Guarda copia del nombre y la
- * placa del momento, de modo que el historial no cambia si luego se edita a
- * la persona.
- *
- * @author salas
- */
+/** Una fila del historial de ingresos y salidas */
 public class Movimiento {
 
     private static final DateTimeFormatter FORMATO =

@@ -12,14 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
 
-/**
- * Consulta (solo lectura) de lo que hay en el escenario: usuarios fijos y
- * visitantes con su estado DENTRO/FUERA, el historial de ingresos y salidas
- * y los incidentes. Lo usa el vigilante; el administrador ademas puede
- * modificar los registros desde su propia ventana.
- *
- * @author salas
- */
+/** Consulta (solo lectura) de lo que hay en el escenario */
 public class PanelRegistros extends JDialog {
 
     public PanelRegistros(Frame ventanaPadre, SistemaControlAcceso sistema) {

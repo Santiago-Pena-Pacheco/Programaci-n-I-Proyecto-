@@ -9,14 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
-/**
- * Dialogo modal para registrar o modificar un usuario fijo. Todos los campos son
- * obligatorios. Las etiquetas (Propietario,
- * Empleado, Personal... / Apartamento, Local, Puesto... / Torre, Piso, Zona...)
- * salen del Escenario, asi que el mismo formulario sirve para todos.
- *
- * @author salas
- */
+/** Dialogo modal para registrar o modificar un usuario fijo */
 public class FormularioUsuarioFijo extends JDialog {
 
     private final JTextField campoNombre = new JTextField();
