@@ -1,13 +1,6 @@
 package com.github.santiago.fundamentos.modelo;
 
-/**
- * Destino dentro de un escenario. Generaliza al antiguo Apartamento: en un
- * conjunto es "Apartamento 101 - Torre 3", en un centro comercial "Local 12
- * - Piso 2", en un concierto "Puesto 5 - Zona VIP". El parqueadero fijo es
- * opcional (composicion 1:1 cuando existe).
- *
- * @author salas
- */
+/** Destino dentro de un escenario */
 public class Ubicacion {
 
     private int idUbicacion;

@@ -9,7 +9,7 @@ Aplicación de escritorio (Java Swing) que lee la placa de un vehículo con una 
 ## Cómo ejecutarlo
 
 1. Instalar JDK 17 y Maven (o abrir en NetBeans). Iniciar **XAMPP** (Apache y MySQL).
-2. En phpMyAdmin → pestaña SQL, ejecutar en este orden: `sql/reiniciar_base.sql` (solo la primera vez), `sql/control_acceso.sql`, `sql/datos_ejemplo.sql`.
+2. En phpMyAdmin → pestaña SQL, ejecutar en este orden: `sql/01_estructura.sql` (borra y vuelve a crear la base `control_acceso`) y `sql/02_datos_ejemplo.sql`. Los scripts 03 a 06 son las consultas de la rúbrica de base de datos.
 3. La carpeta `tessdata` (con `eng.traineddata`, el idioma que usa el OCR) ya viene incluida en la raíz del proyecto; el programa la encuentra solo.
 4. `mvn compile exec:java` (clase principal `com.github.santiago.fundamentos.App`).
 5. Usuarios: `admin / admin123` y `vigilante / vigilante123`.
@@ -30,7 +30,7 @@ Conexión a la BD: `localhost:3306`, base `control_acceso`, usuario `root` sin c
 | `vision` | Detección de placa y OCR |
 | `gui` | Ventanas Swing |
 
-Script de base de datos: `sql/`. Números de línea = archivos tal como están en este repositorio.
+Scripts de base de datos: `sql/` (01 a 06, en orden). Números de línea = archivos tal como están en este repositorio.
 
 ## Mapa del proyecto (dónde se aplicó cada tema)
 
@@ -40,34 +40,38 @@ Rutas relativas a `src/main/java/com/github/santiago/fundamentos/`.
 
 | Tema | Clase | Líneas | Qué se ve |
 |---|---|---|---|
-| **Abstracción** | `modelo/Persona` | 19, 105, 114 | Clase abstracta con `getTipoTexto` y `getDetalleAcceso` abstractos |
-| **Herencia** | `modelo/UsuarioFijo` | 17 | `extends Persona` |
-| **Herencia** | `modelo/Visitante` | 16 | `extends Persona` |
-| **Herencia (excepciones)** | `excepciones/ControlAccesoException` → `DatoInvalidoException`, `ReglaNegocioException` → `SinCupoException`, `AccesoDenegadoException` | 11 / 4 / 4 / 4 / 4 | Jerarquía de 3 niveles |
-| **Polimorfismo** | `modelo/UsuarioFijo` y `modelo/Visitante` | 67-78 y 62-73 | Cada una sobrescribe (`@Override`) `getTipoTexto` y `getDetalleAcceso` |
-| **Polimorfismo (uso)** | `gui/InterfazVigilante` | 257-259 | El aviso se arma llamando a esos métodos sobre una `Persona`, sin saber qué subclase es |
-| **Encapsulamiento** | `modelo/Persona` | 29-100 | Atributos privados, getters y setters que validan (nombre, cédula, vehículo) |
-| **Encapsulamiento** | `modelo/Vehiculo` | 23-51 | Placa privada y validada (`ABC123` / `ABC12D`) |
-| **Encapsulamiento** | `modelo/UsuarioFijo`, `modelo/Visitante` | 32-58 / 31-58 | Setters con validación |
-| **Interfaces** | `dao/AccesoDAO`, `UsuarioFijoDAO`, `VisitanteDAO`, `IncidenteDAO`, `EscenarioDAO`, `UsuarioSistemaDAO` | 24 / 8 / 11 / 7 / 8 / 6 | Contratos de persistencia |
-| **Interfaces** | `video/FuenteVideo` | 10 | Contrato de cualquier fuente de video |
-| **Interfaces** | `gui/PanelCamara.OnPlacaDetectadaListener` | 34-36 | Contrato del observador |
-| **Implementación de interfaces** | `dao/AccesoDAOImpl`, `dao/IncidenteDAOImpl`, `video/FuenteOpenCV`, `video/FuenteMjpeg` | 28 / 18 / 11 / 22 | `implements` |
+| **Abstracción** | `modelo/Persona` | 7, 93, 96 | Clase abstracta con `getTipoTexto` y `getDetalleAcceso` abstractos |
+| **Herencia** | `modelo/UsuarioFijo` | 8 | `extends Persona` |
+| **Herencia** | `modelo/Visitante` | 8 | `extends Persona` |
+| **Herencia (excepciones)** | `excepciones/ControlAccesoException` → `DatoInvalidoException`, `ReglaNegocioException` → `SinCupoException`, `AccesoDenegadoException` | 4 / 4 / 4 / 4 / 4 | Jerarquía de 3 niveles |
+| **Polimorfismo** | `modelo/UsuarioFijo` y `modelo/Visitante` | 58-69 / 54-65 | Cada una sobrescribe (`@Override`) `getTipoTexto` y `getDetalleAcceso` |
+| **Polimorfismo (uso)** | `gui/InterfazVigilante` | 232-234 | El aviso se arma llamando a esos métodos sobre una `Persona`, sin saber qué subclase es |
+| **Encapsulamiento** | `modelo/Persona` | 17-88 | Atributos privados, getters y setters que validan (nombre, cédula, vehículo) |
+| **Encapsulamiento** | `modelo/Vehiculo` | 14-42 | Placa privada y validada (`ABC123` / `ABC12D`) |
+| **Encapsulamiento** | `modelo/UsuarioFijo`, `modelo/Visitante` | 23-49 / 23-50 | Setters con validación |
+| **Interfaces** | `dao/AccesoDAO`, `UsuarioFijoDAO`, `VisitanteDAO`, `IncidenteDAO`, `EscenarioDAO`, `UsuarioSistemaDAO` | 16 / 8 / 8 / 7 / 8 / 6 | Contratos de persistencia |
+| **Interfaces** | `video/FuenteVideo` | 6 | Contrato de cualquier fuente de video |
+| **Interfaces** | `gui/PanelCamara.OnPlacaDetectadaListener` | 22-24 | Contrato del observador |
+| **Implementación de interfaces** | `dao/AccesoDAOImpl`, `dao/IncidenteDAOImpl`, `video/FuenteOpenCV`, `video/FuenteMjpeg` | 28 / 18 / 7 / 17 | `implements` |
 | **Manejo de errores** | `excepciones/*` | todo el paquete | Excepciones propias verificadas (`extends Exception`) |
-| **Manejo de errores** | `modelo/Persona` | 54, 69, 80 | `throw new DatoInvalidoException` |
-| **Manejo de errores** | `logica/ReglasIncidente` | 21-83 | Validadores que lanzan `DatoInvalidoException` |
+| **Manejo de errores** | `modelo/Persona` | 42, 57, 68 | `throw new DatoInvalidoException` |
+| **Manejo de errores** | `logica/ReglasIncidente` | 14-76 | Validadores que lanzan `DatoInvalidoException` |
 | **Manejo de errores** | `dao/AccesoDAOImpl` | 51-54, 154, 163, 289 y catch en 77, 124, 201, 249, 310 | `ReglaNegocioException`, `AccesoDenegadoException`, `SinCupoException`; `rollback` en el catch |
-| **Manejo de errores** | `logica/SistemaControlAcceso` | 102, 189-201, 234 | `throws` y `catch` que traducen errores de BD |
-| **Manejo de errores** | `gui/InterfazVigilante` | 283, 307 | El `catch` muestra el mensaje al usuario |
-| **Manejo de errores** | `conexion/Conexion` | 45-47 | Mensaje claro si MySQL está apagado |
-| **Manejo de errores** | `App` | 29 | `catch (SQLException)` al arrancar |
+| **Manejo de errores** | `logica/SistemaControlAcceso` | 80, 163-175, 208 | `throws` y `catch` que traducen errores de BD |
+| **Manejo de errores** | `gui/InterfazVigilante` | 258, 282 | El `catch` muestra el mensaje al usuario |
+| **Manejo de errores** | `conexion/Conexion` | 38-40 | Mensaje claro si MySQL está apagado |
+| **Manejo de errores** | `App` | 24 | `catch (SQLException)` al arrancar |
 
 ### Persistencia (MySQL, JDBC, DAO)
 
 | Tema | Ubicación | Líneas |
 |---|---|---|
-| Tablas (`escenario`, `configuracion`, `usuario_sistema`, `parqueadero`, `ubicacion`, `usuario_fijo`, `visitante`, `movimiento`, `incidente`) | `sql/control_acceso.sql` | 33, 49, 58, 75, 92, 120, 150, 180, 217 |
-| Datos de ejemplo | `sql/datos_ejemplo.sql` | todo |
+| Tablas con PK, FK, NOT NULL, UNIQUE, DEFAULT y CHECK, más 9 `CREATE INDEX` | `sql/01_estructura.sql` | todo |
+| Datos de ejemplo | `sql/02_datos_ejemplo.sql` | todo |
+| Transacciones (`START TRANSACTION`, `COMMIT`, `ROLLBACK`) con SELECT, INSERT, UPDATE y DELETE | `sql/03_transacciones.sql` | T1 a T4 |
+| JOIN: INNER, LEFT, RIGHT y FULL (LEFT + UNION + RIGHT) | `sql/04_joins.sql` | todo |
+| COUNT, SUM, AVG, MIN y MAX con GROUP BY, WHERE y HAVING | `sql/05_agrupamiento.sql` | todo |
+| Índices y `EXPLAIN` | `sql/06_indices_explain.sql` | todo |
 | CRUD con `PreparedStatement` | `dao/*DAOImpl` | todo |
 | Transacción (`setAutoCommit(false)`, `FOR UPDATE`, `commit`, `rollback`) | `dao/AccesoDAOImpl` | 37-78 |
 | Incidentes: insertar / listar / actualizar | `dao/IncidenteDAOImpl` | 21 / 54 / 92 |
@@ -78,12 +82,12 @@ Rutas relativas a `src/main/java/com/github/santiago/fundamentos/`.
 
 | Pantalla | Clase | Línea |
 |---|---|---|
-| Login | `gui/LoginFrame` | 22 |
+| Login | `gui/LoginFrame` | 16 |
 | Vigilante (cámara, avisos, incidentes) | `gui/InterfazVigilante` | ver clase |
-| Administrador (pestañas) | `gui/VentanaAdministrador` | 37 |
-| Cámara en vivo | `gui/PanelCamara` | 31 |
-| Vehículos adentro | `gui/PanelVehiculosAdentro` | 27 |
-| Registros | `gui/PanelRegistros` | 23 |
+| Administrador (pestañas) | `gui/VentanaAdministrador` | 24 |
+| Cámara en vivo | `gui/PanelCamara` | 19 |
+| Vehículos adentro | `gui/PanelVehiculosAdentro` | 19 |
+| Registros | `gui/PanelRegistros` | 16 |
 | Formularios | `gui/FormularioUsuarioFijo`, `FormularioVisitante`, `FormularioIncidente`, `DialogoEscenario` | clase completa |
 
 ### Principios SOLID
@@ -91,10 +95,10 @@ Rutas relativas a `src/main/java/com/github/santiago/fundamentos/`.
 | Principio | Dónde | Líneas |
 |---|---|---|
 | **S** – una responsabilidad | `ReglasIncidente` solo valida (16-83); `IncidenteBuilder` solo construye (23-82); `Conexion` solo conecta (15-53); los DAO solo acceden a datos; `gui/*` solo dibuja | |
-| **O** – abierto/cerrado | Nueva fuente de video = nueva clase que implementa `FuenteVideo` (sin tocar `PanelCamara`); nuevo tipo de persona = nueva subclase de `Persona` | `video/FuenteVideo` 10; `modelo/Persona` 19 |
-| **L** – sustitución | `UsuarioFijo` y `Visitante` se usan como `Persona` en `InterfazVigilante` | 257-259 |
+| **O** – abierto/cerrado | Nueva fuente de video = nueva clase que implementa `FuenteVideo` (sin tocar `PanelCamara`); nuevo tipo de persona = nueva subclase de `Persona` | `video/FuenteVideo` 6; `modelo/Persona` 7 |
+| **L** – sustitución | `UsuarioFijo` y `Visitante` se usan como `Persona` en `InterfazVigilante` | 232-234 |
 | **I** – interfaces pequeñas | Un DAO por tema (6 interfaces) y `FuenteVideo` con 4 métodos | `dao/*.java` |
-| **D** – inversión de dependencias | `SistemaControlAcceso` depende de las interfaces DAO, recibidas por constructor | `logica/SistemaControlAcceso` 62-67 y 75 |
+| **D** – inversión de dependencias | `SistemaControlAcceso` depende de las interfaces DAO, recibidas por constructor | `logica/SistemaControlAcceso` 49-54 y 62 |
 
 ### Patrones de diseño (funcionan al ejecutar)
 

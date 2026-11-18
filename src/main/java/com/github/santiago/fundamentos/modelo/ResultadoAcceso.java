@@ -1,12 +1,6 @@
 package com.github.santiago.fundamentos.modelo;
 
-/**
- * Lo que paso cuando la camara leyo una placa. Le dice a la ventana que debe
- * mostrar: un aviso de ingreso o salida automatica, un acceso denegado o el
- * formulario de visitante.
- *
- * @author salas
- */
+/** Lo que paso cuando la camara leyo una placa */
 public class ResultadoAcceso {
 
     public enum Tipo {

@@ -1,11 +1,6 @@
 package com.github.santiago.fundamentos.modelo;
 
-/**
- * Persona que inicia sesion en el programa (administrador o vigilante).
- * No confundir con UsuarioFijo, que es quien entra al lugar con su vehiculo.
- *
- * @author salas
- */
+/** Persona que inicia sesion en el programa (administrador o vigilante) */
 public class UsuarioSistema {
 
     private final int idUsuarioSistema;

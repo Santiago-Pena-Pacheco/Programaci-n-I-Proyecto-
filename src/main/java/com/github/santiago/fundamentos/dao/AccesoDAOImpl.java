@@ -400,7 +400,6 @@ public class AccesoDAOImpl implements AccesoDAO {
 
     // ------------------------------------------------------------------
     //  Auxiliares (reutilizan la conexion/transaccion en curso)
-    // ------------------------------------------------------------------
 
     /** Anota un movimiento en el historial. Tambien lo usa UsuarioFijoDAOImpl al dar de baja. */
     static void registrarMovimiento(Connection con, int idEscenario, TipoMovimiento tipo, String placa,
@@ -460,7 +459,6 @@ public class AccesoDAOImpl implements AccesoDAO {
 
     // Un parqueadero de visitantes esta libre si ningun visitante DENTRO lo tiene asignado.
     // Primero se bloquean todos los parqueaderos de visitantes del escenario para que dos
-    // ingresos simultaneos no reciban el mismo cupo.
     private static Parqueadero buscarParqueaderoVisitanteLibre(Connection con, int idEscenario)
             throws SQLException {
         try (PreparedStatement ps = con.prepareStatement(

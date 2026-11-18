@@ -3,19 +3,7 @@ package com.github.santiago.fundamentos.modelo;
 import com.github.santiago.fundamentos.excepciones.DatoInvalidoException;
 import java.util.regex.Pattern;
 
-/**
- * Clase padre abstracta que agrupa los atributos y comportamientos comunes
- * a cualquier persona que interactua con el sistema (UsuarioFijo o Visitante).
- * No puede instanciarse directamente: solo cobra sentido a traves de sus
- * subclases concretas (Herencia + Abstraccion).
- *
- * Encapsulamiento: todos los atributos son privados; solo se cambian por
- * medio de setters que validan el dato y lanzan DatoInvalidoException, asi
- * una Persona nunca queda con un nombre vacio, una cedula mal formada o sin
- * vehiculo.
- *
- * @author salas
- */
+/** Clase padre abstracta que agrupa los atributos y comportamientos comunes a cualquier persona que interactua con el sistema (UsuarioFijo o Visitante) */
 public abstract class Persona {
 
     private static final Pattern CEDULA = Pattern.compile("[0-9]{5,12}");
@@ -104,13 +92,7 @@ public abstract class Persona {
     /** Nombre del tipo de persona para titulos y mensajes ("Propietario", "Visitante"...). */
     public abstract String getTipoTexto(Escenario escenario);
 
-    /**
-     * Metodo abstracto: cada subclase decide COMO describe a donde va y donde
-     * parquea. Se invoca siempre a traves de una referencia Persona y el
-     * mismo mensaje produce un texto distinto segun el tipo real del objeto
-     * (UsuarioFijo vs Visitante), resuelto en tiempo de ejecucion
-     * (binding dinamico) = polimorfismo.
-     */
+    /** Metodo abstracto: cada subclase decide COMO describe a donde va y donde parquea */
     public abstract String getDetalleAcceso(Escenario escenario);
 
     @Override

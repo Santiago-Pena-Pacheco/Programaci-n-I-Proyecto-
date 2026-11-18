@@ -6,20 +6,7 @@ import com.github.santiago.fundamentos.modelo.Incidente;
 import com.github.santiago.fundamentos.modelo.TipoIncidente;
 import com.github.santiago.fundamentos.modelo.UsuarioSistema;
 
-/**
- * BUILDER (patron creacional): arma un Incidente dato por dato, en el mismo
- * orden en que el vigilante lo llena en el formulario, y valida todo al
- * final con build(). Evita el constructor de nueve parametros del Incidente y
- * garantiza que nunca se cree un reporte incompleto.
- *
- * Uso:
- *   Incidente i = new IncidenteBuilder(vigilante)
- *           .tipo(TipoIncidente.DANO_A_VEHICULO).gravedad(GravedadIncidente.MEDIA)
- *           .lugar("Parqueadero 4").placa("ABC123").persona("N/A")
- *           .descripcion("...").acciones("...").build();
- *
- * @author salas
- */
+/** BUILDER (patron creacional) */
 public class IncidenteBuilder {
 
     private final UsuarioSistema vigilante;

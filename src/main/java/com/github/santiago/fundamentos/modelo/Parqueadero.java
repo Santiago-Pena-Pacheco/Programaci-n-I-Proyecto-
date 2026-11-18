@@ -1,12 +1,6 @@
 package com.github.santiago.fundamentos.modelo;
 
-/**
- * Representa un espacio de parqueo. Puede ser el parqueadero fijo de una
- * ubicacion (de su dueno) o uno de los parqueaderos del pool de visitantes.
- * No guarda si esta ocupado: eso se deduce de quien esta DENTRO.
- *
- * @author salas
- */
+/** Representa un espacio de parqueo */
 public class Parqueadero {
 
     private int idParqueadero;

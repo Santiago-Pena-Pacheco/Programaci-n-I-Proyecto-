@@ -20,20 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Ventana del administrador. Desde aqui:
- *   - Elige con que escenario se trabaja, cual queda ACTIVO para el vigilante,
- *     crea escenarios nuevos y modifica el elegido.
- *   - Ve en vivo que vehiculos estan adentro (pestana "Vehiculos adentro").
- *   - Gestiona en pestanas los usuarios fijos (registrar, modificar, dar de baja,
- *     reactivar), los visitantes y los incidentes (modificar) y consulta el
- *     historial de ingresos y salidas.
- *   - Si la camara no alcanzo a leer una placa y el estado DENTRO/FUERA quedo
- *     desfasado, lo corrige a mano (queda en el historial como MANUAL).
- * Nunca se borra nada: la baja solo cambia el estado a INACTIVO.
- *
- * @author salas
- */
+/** Ventana del administrador */
 public class VentanaAdministrador extends JFrame {
 
     private final EscenarioDAO escenarioDAO = new EscenarioDAOImpl();
@@ -90,7 +77,6 @@ public class VentanaAdministrador extends JFrame {
 
     // ------------------------------------------------------------------
     //  Construccion de la ventana
-    // ------------------------------------------------------------------
 
     private JPanel construirEncabezado(UsuarioSistema sesion) {
         JButton botonActivar = new JButton("Activar para el vigilante");
@@ -198,7 +184,6 @@ public class VentanaAdministrador extends JFrame {
 
     // ------------------------------------------------------------------
     //  Escenarios
-    // ------------------------------------------------------------------
 
     /** Llena el combo con los escenarios de la BD y deja seleccionado el indicado (o el activo). */
     private void cargarEscenarios(Escenario seleccionar) {
@@ -288,7 +273,6 @@ public class VentanaAdministrador extends JFrame {
 
     // ------------------------------------------------------------------
     //  Tablas
-    // ------------------------------------------------------------------
 
     private void actualizarTodo() {
         panelAdentro.actualizar();
@@ -377,7 +361,6 @@ public class VentanaAdministrador extends JFrame {
 
     // ------------------------------------------------------------------
     //  Usuarios fijos
-    // ------------------------------------------------------------------
 
     private void registrarUsuarioFijo() {
         FormularioUsuarioFijo formulario = new FormularioUsuarioFijo(this, sistema);
@@ -468,7 +451,6 @@ public class VentanaAdministrador extends JFrame {
 
     // ------------------------------------------------------------------
     //  Visitantes
-    // ------------------------------------------------------------------
 
     private void modificarVisitante() {
         int fila = tablaVisitantes.getSelectedRow();
@@ -524,7 +506,6 @@ public class VentanaAdministrador extends JFrame {
 
     // ------------------------------------------------------------------
     //  Incidentes
-    // ------------------------------------------------------------------
 
     private Incidente incidenteSeleccionado() {
         int fila = tablaIncidentes.getSelectedRow();
@@ -561,7 +542,6 @@ public class VentanaAdministrador extends JFrame {
 
     // ------------------------------------------------------------------
     //  Auxiliares
-    // ------------------------------------------------------------------
 
     /** Dialogo sencillo con un campo de texto por etiqueta. Devuelve los valores o null si se cancela. */
     private String[] pedirCampos(String titulo, String[] etiquetas, String[] valores) {

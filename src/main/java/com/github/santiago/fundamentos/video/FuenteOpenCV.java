@@ -3,11 +3,7 @@ package com.github.santiago.fundamentos.video;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
-/**
- * ADAPTER (patron estructural): adapta la clase VideoCapture de OpenCV, cuya
- * interfaz no controlamos, a la interfaz FuenteVideo que espera la aplicacion.
- * Sirve para una camara numerada o un archivo de video.
- */
+/** ADAPTER (patron estructural) */
 public final class FuenteOpenCV implements FuenteVideo {
 
     private final VideoCapture camara;

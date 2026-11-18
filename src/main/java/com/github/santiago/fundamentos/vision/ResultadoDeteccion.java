@@ -2,15 +2,7 @@ package com.github.santiago.fundamentos.vision;
 
 import org.opencv.core.Rect;
 
-/**
- * Resultado de procesar un frame de la camara: puede traer la region
- * donde se detecto un posible rectangulo de placa (para dibujar el
- * recuadro en la GUI) y, opcionalmente, una placa ya CONFIRMADA (validada
- * durante varias lecturas consecutivas identicas, igual que el buffer
- * "lecturas_placa" del script original en Python).
- *
- * @author salas
- */
+/** Resultado de procesar un frame de la camara */
 public class ResultadoDeteccion {
 
     private final Rect regionPlaca;      // puede ser null si no se detecto contorno candidato

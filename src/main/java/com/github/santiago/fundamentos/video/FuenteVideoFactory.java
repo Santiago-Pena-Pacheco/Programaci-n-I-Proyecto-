@@ -3,14 +3,7 @@ package com.github.santiago.fundamentos.video;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
-/**
- * FACTORY (patron creacional): a partir de un texto escrito por el vigilante
- * decide QUE clase de FuenteVideo crear, y PanelCamara no necesita conocer
- * ninguna clase concreta:
- *   "0", "1"...            camara numerada (FuenteOpenCV)
- *   "http://..."           transmision MJPEG del celular (FuenteMjpeg)
- *   otra cosa              ruta de un archivo de video (FuenteOpenCV)
- */
+/** FACTORY (patron creacional) */
 public final class FuenteVideoFactory {
 
     private FuenteVideoFactory() {

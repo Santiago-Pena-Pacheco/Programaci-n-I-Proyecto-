@@ -15,15 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Lista en vivo de los vehiculos que estan DENTRO del escenario: quien es, su
- * placa, a donde va, en que parqueadero esta, a que hora entro y cuanto lleva
- * adentro. Se puede buscar por placa o nombre y se actualiza sola cada pocos
- * segundos mientras esta visible, asi el vigilante y el administrador la pueden
- * dejar abierta mientras la camara registra ingresos y salidas.
- *
- * @author salas
- */
+/** Lista en vivo de los vehiculos que estan DENTRO del escenario */
 public class PanelVehiculosAdentro extends JPanel {
 
     private static final int SEGUNDOS_ACTUALIZACION = 10;

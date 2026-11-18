@@ -12,13 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
-/**
- * Ventana de inicio de sesion. Segun el rol del usuario abre la ventana
- * del Administrador (gestiona escenarios y usuarios fijos) o la del
- * Vigilante (camara, visitantes e incidentes del escenario activo).
- *
- * @author salas
- */
+/** Ventana de inicio de sesion */
 public class LoginFrame extends JFrame {
 
     private final UsuarioSistemaDAO usuarioDAO = new UsuarioSistemaDAOImpl();

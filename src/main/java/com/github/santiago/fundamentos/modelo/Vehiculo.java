@@ -3,16 +3,7 @@ package com.github.santiago.fundamentos.modelo;
 import com.github.santiago.fundamentos.excepciones.DatoInvalidoException;
 import java.util.regex.Pattern;
 
-/**
- * Representa un vehiculo, ya sea de un usuario fijo o de un visitante.
- * La placa se guarda normalizada (mayusculas, sin espacios ni guiones), de
- * modo que "abc 123", "ABC-123" y "ABC123" son la misma placa. Esto es
- * necesario porque el OCR de la camara entrega "ABC 123" con espacio.
- * Un Vehiculo nunca existe con una placa invalida: se valida al crearlo y
- * al cambiarla (encapsulamiento).
- *
- * @author salas
- */
+/** Representa un vehiculo, ya sea de un usuario fijo o de un visitante */
 public class Vehiculo {
 
     // Colombia: carro ABC123, moto ABC12D
