@@ -39,7 +39,7 @@ public final class Conexion {
             // Se captura la excepcion original y se lanza una con un mensaje claro
             throw new SQLException("No se pudo conectar a la base de datos 'control_acceso'.\n"
                     + "Verifique que MySQL este encendido en XAMPP, que haya importado "
-                    + "sql/01_estructura.sql y que el usuario y la clave sean correctos.\n"
+                    + "sql/01_inicializacion.sql y que el usuario y la clave sean correctos.\n"
                     + "Detalle: " + e.getMessage(), e);
         }
     }

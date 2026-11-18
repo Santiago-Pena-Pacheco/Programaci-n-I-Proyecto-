@@ -1,5 +1,5 @@
--- 06_indices_explain.sql: EXPLAIN de las consultas que usan los índices creados en 01_estructura.sql.
--- Ejecutar después de 02_datos_ejemplo.sql. En la columna "key" de cada resultado debe aparecer
+-- 06_indices_explain.sql: EXPLAIN de las consultas que usan los índices creados en 01_inicializacion.sql.
+-- Ejecutar después de 01_inicializacion.sql. En la columna "key" de cada resultado debe aparecer
 -- el índice indicado; "rows" muestra cuántas filas revisa MySQL.
 
 USE control_acceso;

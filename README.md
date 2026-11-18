@@ -9,7 +9,7 @@ Aplicación de escritorio (Java Swing) que lee la placa de un vehículo con una 
 ## Cómo ejecutarlo
 
 1. Instalar JDK 17 y Maven (o abrir en NetBeans). Iniciar **XAMPP** (Apache y MySQL).
-2. En phpMyAdmin → pestaña SQL, ejecutar en este orden: `sql/01_estructura.sql` (borra y vuelve a crear la base `control_acceso`) y `sql/02_datos_ejemplo.sql`. Los scripts 03 a 06 son las consultas de la rúbrica de base de datos.
+2. En phpMyAdmin → pestaña SQL, ejecutar en este orden: `sql/01_inicializacion.sql` (borra y vuelve a crear la base `control_acceso`, con sus tablas, índices y datos de ejemplo). Los scripts 02 a 06 son las pruebas de la rúbrica de base de datos: validación de constraints, transacciones, JOIN, agrupamiento e índices con EXPLAIN.
 3. La carpeta `tessdata` (con `eng.traineddata`, el idioma que usa el OCR) ya viene incluida en la raíz del proyecto; el programa la encuentra solo.
 4. `mvn compile exec:java` (clase principal `com.github.santiago.fundamentos.App`).
 5. Usuarios: `admin / admin123` y `vigilante / vigilante123`.
@@ -66,10 +66,10 @@ Rutas relativas a `src/main/java/com/github/santiago/fundamentos/`.
 
 | Tema | Ubicación | Líneas |
 |---|---|---|
-| Tablas con PK, FK, NOT NULL, UNIQUE, DEFAULT y CHECK, más 9 `CREATE INDEX` | `sql/01_estructura.sql` | todo |
-| Datos de ejemplo | `sql/02_datos_ejemplo.sql` | todo |
+| Tablas con PK, FK, NOT NULL, UNIQUE, DEFAULT y CHECK, 9 `CREATE INDEX` y datos de ejemplo | `sql/01_inicializacion.sql` | todo |
+| Inserciones inválidas que rechazan los CHECK, UNIQUE y FK | `sql/02_validacion_constraints.sql` | todo |
 | Transacciones (`START TRANSACTION`, `COMMIT`, `ROLLBACK`) con SELECT, INSERT, UPDATE y DELETE | `sql/03_transacciones.sql` | T1 a T4 |
-| JOIN: INNER, LEFT, RIGHT y FULL (LEFT + UNION + RIGHT) | `sql/04_joins.sql` | todo |
+| JOIN: INNER, LEFT, RIGHT y FULL (LEFT + UNION + RIGHT), con 2 EXPLAIN | `sql/04_joins.sql` | todo |
 | COUNT, SUM, AVG, MIN y MAX con GROUP BY, WHERE y HAVING | `sql/05_agrupamiento.sql` | todo |
 | Índices y `EXPLAIN` | `sql/06_indices_explain.sql` | todo |
 | CRUD con `PreparedStatement` | `dao/*DAOImpl` | todo |

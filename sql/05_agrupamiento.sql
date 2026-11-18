@@ -1,5 +1,5 @@
 -- 05_agrupamiento.sql: COUNT, SUM, AVG, MIN y MAX con GROUP BY, WHERE y HAVING.
--- Ejecutar después de 02_datos_ejemplo.sql. WHERE filtra las filas antes de agrupar;
+-- Ejecutar después de 01_inicializacion.sql. WHERE filtra las filas antes de agrupar;
 -- HAVING solo filtra condiciones sobre los resultados agregados.
 
 USE control_acceso;
