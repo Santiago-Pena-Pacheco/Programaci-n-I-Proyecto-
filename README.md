@@ -140,7 +140,3 @@ Cada fase del proyecto es una etiqueta (`git checkout fase-1`, `git checkout fas
 | `fase-3` | `feature/documentacion` | Este README con el Mapa del proyecto |
 
 Entre `fase-2e` y `fase-2f` el programa aún no tiene ventana principal: se retiró la interfaz de diálogos de la fase 2 y la nueva Swing llega en `fase-2f`.
-
-## Entrega en GitHub
-
-Repositorio público o compartido con el docente, con commits (no subir ZIP), este `README.md`, el script en `sql/` y los paquetes. Último commit: sábado 21 de noviembre.
