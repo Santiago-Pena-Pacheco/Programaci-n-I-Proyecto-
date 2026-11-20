@@ -2,9 +2,14 @@
 
 Proyecto de **Programación 1** – Ingeniería de Sistemas, Universidad Libre. Docente: Andrés Castaño.
 
-**Integrantes:** _(escribir aquí nombre completo y código de cada integrante)_
+**Integrantes:** 
+- Nicole Camila Abril Reyes
+- Gabriel Enrique Pacheco Salazar
+- Santiago Peña Pacheco
+- Julieta Quevedo González
 
-Aplicación de escritorio (Java Swing) que lee la placa de un vehículo con una cámara (OpenCV + Tess4J), decide si entra o sale y lo guarda en MySQL. Sirve para varios escenarios (residencial, centro comercial, concierto, oficinas) cambiando solo los datos del escenario. **No usa API**: la GUI es la interfaz.
+
+Aplicación de escritorio (Java Swing) que lee la placa de un vehículo con una cámara (OpenCV + Tess4J), decide si entra o sale y lo guarda en MySQL. Sirve para varios escenarios (residencial, centro comercial, concierto, oficinas) cambiando solo los datos del escenario. la GUI es la interfaz.
 
 ## Cómo ejecutarlo
 
