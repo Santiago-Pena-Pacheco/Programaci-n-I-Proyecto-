@@ -17,13 +17,11 @@
     </properties>
 
     <dependencies>
-        <!-- Conector JDBC para MySQL/MariaDB de XAMPP -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.4.0</version>
         </dependency>
-        <!-- Las dos siguientes ya las usaba el proyecto: si su pom ya las tiene, deje las suyas -->
         <dependency>
             <groupId>org.openpnp</groupId>
             <artifactId>opencv</artifactId>
