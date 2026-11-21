@@ -14,7 +14,7 @@ Aplicación de escritorio (Java Swing) que lee la placa de un vehículo con una 
 ## Cómo ejecutarlo
 
 1. Instalar JDK 17 y Maven (o abrir en NetBeans). Iniciar **XAMPP** (Apache y MySQL).
-2. En phpMyAdmin → pestaña SQL, ejecutar en este orden: `sql/01_inicializacion.sql` (borra y vuelve a crear la base `control_acceso`, con sus tablas, índices y datos de ejemplo). Los scripts 02 a 06 son las pruebas de la rúbrica de base de datos: validación de constraints, transacciones, JOIN, agrupamiento e índices con EXPLAIN.
+2. En phpMyAdmin → pestaña SQL, ejecutar en este orden: `sql/inicializacion.sql` (borra y vuelve a crear la base `control_acceso`, con sus tablas, índices y datos de ejemplo). Los scripts 02 a 06 son las pruebas de la rúbrica de base de datos: validación de constraints, transacciones, JOIN, agrupamiento e índices con EXPLAIN.
 3. La carpeta `tessdata` (con `eng.traineddata`, el idioma que usa el OCR) ya viene incluida en la raíz del proyecto; el programa la encuentra solo.
 4. `mvn compile exec:java` (clase principal `com.github.santiago.fundamentos.App`).
 5. Usuarios: `admin / admin123` y `vigilante / vigilante123`.
