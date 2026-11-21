@@ -71,12 +71,7 @@ Rutas relativas a `src/main/java/com/github/santiago/fundamentos/`.
 
 | Tema | Ubicación | Líneas |
 |---|---|---|
-| Tablas con PK, FK, NOT NULL, UNIQUE, DEFAULT y CHECK, 9 `CREATE INDEX` y datos de ejemplo | `sql/01_inicializacion.sql` | todo |
-| Inserciones inválidas que rechazan los CHECK, UNIQUE y FK | `sql/02_validacion_constraints.sql` | todo |
-| Transacciones (`START TRANSACTION`, `COMMIT`, `ROLLBACK`) con SELECT, INSERT, UPDATE y DELETE | `sql/03_transacciones.sql` | T1 a T4 |
-| JOIN: INNER, LEFT, RIGHT y FULL (LEFT + UNION + RIGHT), con 2 EXPLAIN | `sql/04_joins.sql` | todo |
-| COUNT, SUM, AVG, MIN y MAX con GROUP BY, WHERE y HAVING | `sql/05_agrupamiento.sql` | todo |
-| Índices y `EXPLAIN` | `sql/06_indices_explain.sql` | todo |
+| Tablas con PK, FK, NOT NULL, UNIQUE, DEFAULT y CHECK, 9 `CREATE INDEX` y datos de ejemplo | `sql/inicializacion.sql` | todo |
 | CRUD con `PreparedStatement` | `dao/*DAOImpl` | todo |
 | Transacción (`setAutoCommit(false)`, `FOR UPDATE`, `commit`, `rollback`) | `dao/AccesoDAOImpl` | 37-78 |
 | Incidentes: insertar / listar / actualizar | `dao/IncidenteDAOImpl` | 21 / 54 / 92 |
